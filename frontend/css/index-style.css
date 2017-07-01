@@ -1,0 +1,63 @@
+body, html {
+	height: 100%;
+	width: 100%;
+	overflow-x:hidden;
+}
+
+.main {
+	color: #f2f2f2;
+	background: url('../images/home-bg.jpg') no-repeat center center;
+	background-size: cover;
+}
+
+.title-text {
+	font-family: 'Lato', sans-serif;
+	font-size: 18px;
+	cursor: pointer;
+}
+
+.nav-style {
+	padding-top: 10px;
+	padding-bottom: 5px;
+	vertical-align: text-top;
+	text-align: right;
+}
+
+.left-col {
+	text-align: left;
+}
+
+.nav-btn {
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 2px;
+	padding-right: 2px;
+}
+
+.nav-btn-style {
+	background: none;
+	color: #f2f2f2;
+	margin-left: 10px;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.nav-btn-style:hover {
+	background: #4caf50;
+	color: #f2f2f2;
+	border: #4caf50;
+}
+
+.main-container {
+	padding-top: 70px;
+	width: 100%;
+	height: 100%;
+	display: -webkit-flex;
+	display: flex;
+    -webkit-flex-direction: row /* works with row or column */
+    flex-direction: row;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+
