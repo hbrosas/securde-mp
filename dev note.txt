@@ -1,0 +1,4 @@
+Color Theme:
+Green - #4caf50
+White - #ffffff
+Black (texts) - #424242
