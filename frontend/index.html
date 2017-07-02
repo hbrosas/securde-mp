@@ -17,14 +17,14 @@
 
 	<body class = "the-body">
 		<div class ="main-container">
-			
+
 			<div id="home-cont" class="home-cont">
 				<img src="images/logo.png" class="img-responsive" id="logo" alt="Responsive image" style="width: 150px;">
 				<h1 class="header">De La Salle University - SHS Online Library</h1>
 				<br>
 				<p>
 					<button type="button" id="choose-login" class="btn btn-primary btn-lg btn-design" style="background-color: #1b5e20; border-color: #1b5e20;">
-						Log In Account
+						Login Account
 					</button>
 					&nbsp; or &nbsp;
 					<button type="button" id="choose-guest" class="btn btn-default btn-lg btn-design" style="border-color: #ffffff;">Continue as Guest</button>
@@ -36,7 +36,7 @@
 					<div class="main">
 						<div class="login-head-bg">
 							<span class="login-header">
-								Log In Account 
+								Login Account
 								<a class="pull-right back-text" id="back-text"><< &nbsp; Back</a>
 							</span>
 						</div>
@@ -50,12 +50,13 @@
 								<label for="inputPassword" style="font-family: 'Open Sans'; font-weight: 100;">Password</label>
 								<input type="password" class="form-control" id="inputPassword">
 							</div>
-							<label style="font-family: 'Open Sans'; font-weight: 100;">
-								<input type="checkbox"> 
-								Remember me
-							</label>
+							<div class="form-group">
+								<label for="inputConfirmPassword" style="font-family: 'Open Sans'; font-weight: 100;">Confirm Password</label>
+								<input type="password" class="form-control" id="inputConfirmPassword">
+							</div>
 							<a class="pull-right" href="#" style="font-family: 'Open Sans'; font-weight: 100;">Forgot password?</a><br><br>
 							<button type="submit" href="" class="btn btn btn-primary btn-block" style="background-color: #1b5e20; border-color: #1b5e20;"> Log In</button>
+							<div class="flex-center"><a href="#" style="font-family: 'Open Sans'; font-weight: 100; color: white; text-align:center;">Don't have an account?</a><br><br></div>
 						</form>
 					</div>
 				</div>
@@ -63,10 +64,10 @@
 
 			<div class="container" id="search-cont">
 				<div class="row">
-					<div class="main">						
+					<div class="main">
 						<div class="login-head-bg">
 							<span class="login-header">
-								Search 
+								Search
 								<a class="pull-right back-text" id="search-back-text"><< &nbsp; Back</a>
 							</span>
 						</div>
@@ -83,7 +84,7 @@
 						<div class="form-group">
 							<input type="text" class="form-control" id="inputKeyword">
 						</div>
-						
+
 						<button type="submit" href="" class="btn btn btn-primary btn-block" style="background-color: #1b5e20; border-color: #1b5e20;"> Search</button>
 						<div class="login-or">
 							<span class="span-or">or</span>
