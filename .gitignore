@@ -14,3 +14,14 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 /.metadata/
+*.fdx
+*.fdt
+*.fnm
+*.frq
+*.nrm
+*.prx
+*.tii
+*.tis
+*.gen
+.recommenders/index/http___download_eclipse_org_recommenders_models_oxygen_/segments_1
+*.lock

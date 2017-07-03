@@ -1,0 +1,42 @@
+.main-container {
+	padding-top: 70px;
+	padding-bottom: 20px;
+}
+
+.catalog-info {
+	width: 80%;
+}
+
+.catalog-status {
+	width: 20%;
+}
+
+.catalog-status-cont {
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-direction: column;
+	flex-direction: column;
+	-webkit-align-items: center;
+	align-items: center;
+	-webkit-justify-content: center;
+	justify-content: center;
+}
+
+.status-cont {
+	height: 75%;
+	width: 100%;
+	text-align: center;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	background-color: #c5e1a5;
+}
+
+.status {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.date {
+
+}
