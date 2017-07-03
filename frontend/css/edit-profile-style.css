@@ -1,0 +1,15 @@
+ul.horizontal-list {
+	min-width: 696px;
+	list-style: none;
+	padding-top: 20px;
+	}
+	ul.horizontal-list li {
+		display: inline;
+	}
+  .main-title{
+    font-size: 4em;
+    font-weight: 100;
+    color: grey;
+
+    padding-bottom: 2%;
+  }
