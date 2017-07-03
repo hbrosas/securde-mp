@@ -12,17 +12,28 @@ body, html {
 }
 
 .main-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    height: 100%;
+    width: 80%;
+    margin-left: 10%;
 }
 
 .main-title {
     font-size: 4em;
     font-weight: 100;
     color: white;
+    text-align: center;
+    padding-top: 10%;
+    padding-bottom: 0;
 }
 
-.register-input{
-  width: 255px;
+.registration-form{
+  padding: 10%;
+}
+
+.registration-form input{
+  height: 50px;
+  font-size: 1.5em;
+}
+.registration-form button{
+  height: 50px;
 }
