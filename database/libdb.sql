@@ -31,7 +31,7 @@ CREATE TABLE `borrowhistory` (
   `accountId` int(11) DEFAULT NULL,
   `dateBorrowed` datetime NOT NULL,
   `dateExpectReturn` datetime NOT NULL,
-  `dataReturn` datetime DEFAULT NULL,
+  `dateReturn` datetime DEFAULT NULL,
   PRIMARY KEY (`borrowId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -62,7 +62,10 @@ CREATE TABLE `catalog` (
   `publisher` varchar(150) NOT NULL,
   `year` int(11) NOT NULL,
   `tags` varchar(500) NOT NULL,
-  PRIMARY KEY (`catalogId`)
+  PRIMARY KEY (`catalogId`),
+  KEY `statusId_idx` (`statusId`),
+  KEY `typeId_idx` (`typeId`),
+  KEY `borrowId_idx` (`currentborrowId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -341,4 +344,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-07-02 23:02:05
+-- Dump completed on 2017-07-03 17:45:15
