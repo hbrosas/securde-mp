@@ -1,0 +1,28 @@
+body, html {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    background-color: #ffffff;
+}
+
+.the-body {
+    color: #f2f2f2;
+    background: url('../images/home-bg.jpg') no-repeat center center;
+    background-size: cover;
+}
+
+.main-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-title {
+    font-size: 4em;
+    font-weight: 100;
+    color: white;
+}
+
+.register-input{
+  width: 255px;
+}
