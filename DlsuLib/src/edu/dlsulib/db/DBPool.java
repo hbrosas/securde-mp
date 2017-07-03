@@ -3,7 +3,7 @@ package edu.dlsulib.db;
 import java.sql.Connection;
 import java.sql.SQLException;
 
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
+import org.apache.tomcat.dbcp.dbcp.BasicDataSource;
 
 public class DBPool {
 	public static final String schema = "libdb";
