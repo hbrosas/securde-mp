@@ -59,7 +59,7 @@ public class AccountManager {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
-			Userid = userid;
+			Accountid = userid;
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -94,7 +94,43 @@ public class AccountManager {
 			rs = pstmt.executeQuery();
 
 			if(rs.next()) {
-				rs.getInt(0);
+				Accountid = rs.getInt(0);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return Accountid;
+	}
+	
+	public static int getAccountDetails(String value, String password) {
+		String sql = "SELECT " + " * " + " FROM " + UserAccount.TABLE_NAME + " WHERE " + UserAccount.COLUMN_USERNAME + " = "
+				+ value + " OR " + UserAccount.COLUMN_EMAILADDRESS + " = " + value + " AND " + UserAccount.COLUMN_PASSWORD
+				 + password + ";";
+		
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int Accountid = 0;
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				Accountid = rs.getInt(0);
 			}
 			
 		} catch (SQLException e) {
