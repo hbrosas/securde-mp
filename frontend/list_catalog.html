@@ -16,7 +16,7 @@
 	</head>
 
 	<body>
-		<nav class="navbar navbar-default">
+		<nav class="navbar navbar-default navbar-fixed-top">
 			<div class="container-fluid">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
@@ -33,7 +33,7 @@
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				 	<ul class="nav navbar-nav">
 				 		<li class="active"><a href="#">Reserve Meeting Room <span class="sr-only">(current)</span></a></li>
-				 		<li><a href="#">Search Catalog</a></li>
+				 		<li><a href="#" id="enable-search">Search Catalog</a></li>
 					 </ul>
 
 					<ul class="nav navbar-nav navbar-right">
@@ -48,10 +48,88 @@
 							</ul>
 						</li>
 					</ul>
+
+					<ul class="nav navbar-nav" id="search-navbar">
+						<li><a class="navbar-brand" href="#">Search Catalog</a></li>
+				 		<li>
+					 		<form class="navbar-form navbar-left" role="search">
+					 			<div class="form-group">
+					 				<select class="form-control">
+					 					<option value="Location">Location</option>
+					 					<option value="Author">Author</option>
+					 					<option value="Publisher">Publisher</option>
+					 					<option value="Tags">Tags</option>
+					 				</select>
+					 				<input type="text" class="form-control" placeholder="Keyword" style="width: 800px;">
+					 				<select class="form-control">
+					 					<option value="Books">Books</option>
+					 					<option value="Magazines">Magazines</option>
+					 					<option value="Thesis">Thesis</option>
+					 				</select>
+					 			</div>
+					 			<button type="submit" class="btn btn-default" style="width: 100px;">Submit</button>
+					 		</form>
+					 	</li>
+					 </ul>
     			</div><!-- /.navbar-collapse -->
   			</div><!-- /.container-fluid -->
 		</nav>
 
+		<div class="main-container">
+			<div class="contianer">
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+				hello <br>
+			</div>
+		</div>
 
 		<!-- Scripts -->
 		<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
@@ -60,9 +138,25 @@
 
 		<!-- Main Script -->
 		<script type="text/javascript">
+			var searchbarclicked = false;
+			var searchbar = $('#search-navbar');
+			$('#search-navbar').hide();
+
 			$(document).ready(function(){
-				
+				$("#enable-search").on('click', function() {
+					toggleSearchBar();
+				});
 			});
+
+			function toggleSearchBar() {
+				if(searchbarclicked == true) {
+					searchbar.hide(500);
+					searchbarclicked = false;
+				} else if(searchbarclicked == false) {
+					searchbar.show(500);
+					searchbarclicked = true;
+				}
+			};
 		</script>
 
 	</body>
