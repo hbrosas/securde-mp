@@ -9,6 +9,15 @@ public class Review implements Serializable {
 	public static final String COLUMN_CATALOGID = "catalogId";
 	public static final String COLUMN_REVIEW = "review";
 	public static final String COLUMN_DATEREVIEWED = "dateReviewed";
+	
+	public Review(int reviewId, int userId, int catalogId, String review, String dateReviewed) {
+		super();
+		this.reviewId = reviewId;
+		this.userId = userId;
+		this.catalogId = catalogId;
+		this.review = review;
+		this.dateReviewed = dateReviewed;
+	}
 
 	private int reviewId, userId, catalogId;
 	private String review, dateReviewed;
