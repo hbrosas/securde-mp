@@ -9,13 +9,19 @@ public class Catalog implements Serializable {
 	public static final String COLUMN_TYPEID = "typeId";
 	public static final String COLUMN_CURRENTBORROWID = "currentBorrowId";
 	public static final String COLUMN_LOCATION = "location";
+	public static final String COLUMN_TITLE = "title";
 	public static final String COLUMN_AUTHOR = "author";
 	public static final String COLUMN_PUBLISHER = "publisher";
 	public static final String COLUMN_YEAR = "year";
 	public static final String COLUMN_TAGS = "tags";
 	
 	private int catalogId, statusId, typeId, currentBorrowId;
-	private String location, author, publisher, year, tags;
+	private String location, title,  author, publisher, year, tags;
+	
+	
+	public String getColumnTitle() {
+		return COLUMN_TITLE;
+	}
 	
 	public int getCatalogId() {
 		return catalogId;
@@ -47,6 +53,11 @@ public class Catalog implements Serializable {
 	public void setLocation(String location) {
 		this.location = location;
 	}
+	
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	
 	public String getAuthor() {
 		return author;
 	}
