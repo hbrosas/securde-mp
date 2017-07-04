@@ -11,20 +11,27 @@ import edu.dlsulib.db.DBPool;
 
 public class AccountManager {
 	public static ArrayList<Integer> GetAllAccounts() {
-		String sql = "SELECT " + UserAccount.COLUMN_ACCOUNTID + " FROM " + UserAccount.TABLE_NAME
+		String sql = "SELECT " + " * " + " FROM " + UserAccount.TABLE_NAME
 				 + ";";
 		
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<Integer> accountIds = new ArrayList<>();
+		ArrayList<UserAccount> account = new ArrayList<>();
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				 accountIds.add(rs.getInt(UserAccount.COLUMN_ACCOUNTID));
+				 account.add(new UserAccount(rs.getInt(UserAccount.COLUMN_USERID),
+						 					rs.getInt(UserAccount.COLUMN_ACCOUNTID),
+						 					rs.getInt(UserAccount.COLUMN_ROLEID),
+						 					rs.getInt(UserAccount.COLUMN_SQID),
+						 					rs.getString(UserAccount.COLUMN_USERNAME),
+						 					rs.getString(UserAccount.COLUMN_PASSWORD),
+						 					rs.getString(UserAccount.COLUMN_EMAILADDRESS),
+						 					rs.getString(UserAccount.COLUMN_SQANSWER)));
 			}
 			
 		} catch (SQLException e) {

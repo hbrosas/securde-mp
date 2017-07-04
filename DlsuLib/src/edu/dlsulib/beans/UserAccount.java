@@ -13,6 +13,19 @@ public class UserAccount implements Serializable {
 	public static final String COLUMN_SQID = "SQId";
 	public static final String COLUMN_SQANSWER = "SQAnswer";
 	
+	public UserAccount(int userId, int accountId, int roleId, int sQId, String username, String password,
+			String emailAddress, String sQAnswer) {
+		super();
+		this.userId = userId;
+		this.accountId = accountId;
+		this.roleId = roleId;
+		SQId = sQId;
+		this.username = username;
+		this.password = password;
+		this.emailAddress = emailAddress;
+		SQAnswer = sQAnswer;
+	}
+	
 	private int userId, accountId, roleId, SQId;
 	private String username, password, emailAddress, SQAnswer;
 	

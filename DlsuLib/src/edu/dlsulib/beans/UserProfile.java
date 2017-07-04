@@ -3,6 +3,7 @@ package edu.dlsulib.beans;
 import java.io.Serializable;
 
 public class UserProfile implements Serializable {
+
 	public static final String TABLE_NAME = "userprofile";
 	public static final String COLUMN_USERID = "userId";
 	public static final String COLUMN_ACCOUNTID = "accountId";
@@ -13,6 +14,20 @@ public class UserProfile implements Serializable {
 	public static final String COLUMN_BIRTHDATE = "birthDate";
 	public static final String COLUMN_BIRTHMONTH = "birthMonth";
 	public static final String COLUMN_BIRTHYEAR = "birthYear";
+	
+	public UserProfile(int userId, int accountId, String firstname, String middlename, String lastname, String idNumber,
+			int birthDate, int birthMonth, int birthYear) {
+		super();
+		this.userId = userId;
+		this.accountId = accountId;
+		this.firstname = firstname;
+		this.middlename = middlename;
+		this.lastname = lastname;
+		this.idNumber = idNumber;
+		this.birthDate = birthDate;
+		this.birthMonth = birthMonth;
+		this.birthYear = birthYear;
+	}
 	
 	private int userId, accountId;
 	private String firstname, middlename, lastname, idNumber;

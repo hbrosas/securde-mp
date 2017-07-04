@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
+import edu.dlsulib.beans.UserAccount;
 import edu.dlsulib.beans.UserProfile;
 import edu.dlsulib.db.DBPool;
 
@@ -89,7 +91,88 @@ public class ProfileManager {
 			}
 		}
 		
+	}
+	public static int GetProfile(int profileid) {
+		String sql = "SELECT " + " * " + " FROM " + UserProfile.TABLE_NAME + " WHERE " + UserProfile.COLUMN_USERID + " LIKE "
+				+ profileid + ";";
+		
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int Accountid = 0;
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			if(rs.next()) {
+				Accountid = rs.getInt(UserAccount.COLUMN_ACCOUNTID);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
+		return Accountid;
+		
+		
+	}
+	
+	public static int GetAllProfile(int profileid) {
+		String sql = "SELECT " + " * " + " FROM " + UserProfile.TABLE_NAME + ";";
+		
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<UserProfile> userprofile = new ArrayList<>();
+		
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				userprofile.add(new UserProfile(rs.getInt(UserProfile.COLUMN_USERID),
+								rs.getInt(UserProfile.COLUMN_ACCOUNTID),
+								rs.getString(UserProfile.COLUMN_FIRSTNAME),
+								rs.getString(UserProfile.COLUMN_MIDDLENAME),
+								rs.getString(UserProfile.COLUMN_LASTNAME),
+								rs.getString(UserProfile.COLUMN_IDNUMBER),
+								rs.getInt(UserProfile.COLUMN_BIRTHDATE),
+								rs.getInt(UserProfile.COLUMN_BIRTHMONTH),
+								rs.getInt(UserProfile.COLUMN_BIRTHYEAR)));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return Accountid;
+		
+		
+	}
+	
+	
 		
 }
