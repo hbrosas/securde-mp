@@ -42,20 +42,30 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li><a href="#" id="enable-search"><span class="glyphicon glyphicon-search"></span> Search</a></li>
-                    <li class="active"><a href="cart.html"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+                    <li class="active"><a href="/" onclick="return false;"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hazel Brosas <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="borrow_history.html">Borrow History</a></li>
-                            <li><a href="#">Reservation History</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="edit_profile.html">Edit Profile</a></li>
-                            <li><a href="#">Logout</a></li>
-                        </ul>
-                    </li>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+						<c:if test="${account.roleId != 6}">
+							${profile.lastname}, ${profile.firstname}
+							&nbsp;<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="borrow_history.html">Borrow History</a></li>
+								<li><a href="#">Reservation History</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="edit_profile.html">Edit Profile</a></li>
+								<li><a href="#">Logout</a></li>
+							</ul>
+						</c:if>
+						<c:if test="${account.roleId == 6}">
+							Guest
+							&nbsp;<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li role="separator" class="divider"></li>
+								<li><a href="#">Login</a></li>
+							</ul>
+						</c:if>
+					</li>
                 </ul>
-
-
             </div>
             <!-- /.navbar-collapse -->
             <ul class="nav navbar-nav" id="search-navbar">
@@ -98,68 +108,48 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr>
+              	<c:forEach var = "rc" items = "${reservedCatalogs}">
+              		<tr class="reservedCatalogs" id="${rc.catalogId}">
                       <td class="col-sm-8 col-md-6">
                       <div class="media">
                           <a class="thumbnail pull-left" href="#"> <img class="media-object" src="images/book.png" style="width: 72px; height: 72px;"> </a>
                           <div class="media-body">
-                              <h4 class="media-heading"><a href="#">How to be a badass</a></h4>
-                              <h5 class="media-heading"> by <a href="#">John Wick</a></h5>
-                              <span>Category: </span><span class="text-success"><strong>Book</strong></span>
+                              <h4 class="media-heading"><a href="#">${rc.title}</a></h4>
+                              <h5 class="media-heading"> by <a href="#">${rc.author}</a></h5>
+                              <c:if test="${rc.typeId == 1}">
+                              	<span>Category: </span><span class="text-success"><strong>Book</strong></span>
+                              </c:if>
+                              <c:if test="${rc.typeId == 2}">
+                              	<span>Category: </span><span class="text-success"><strong>Magazine</strong></span>
+                              </c:if>
+                              <c:if test="${rc.typeId == 3}">
+                              	<span>Category: </span><span class="text-success"><strong>Thesis</strong></span>
+                              </c:if>
                           </div>
                       </div></td>
                       <td class="col-sm-1 col-md-1" style="text-align: center"></td>
                       <td class="col-sm-1 col-md-1 text-center"> </td>
                       <td class="col-sm-1 col-md-1 text-center"> </td>
                       <td class="col-sm-1 col-md-1">
-                      <button type="button" class="btn btn-danger">
+                      <button type="button" class="btn btn-danger" id="removebtn" data-id="${rc.catalogId}">
                           <span class="glyphicon glyphicon-remove"></span> Remove
                       </button></td>
                   </tr>
-                  <tr>
-                      <td class="col-sm-8 col-md-6">
-                      <div class="media">
-                          <a class="thumbnail pull-left" href="#"> <img class="media-object" src="images/magazine.png" style="width: 72px; height: 72px;"> </a>
-                          <div class="media-body">
-                              <h4 class="media-heading"><a href="#">Cooking and Cursing</a></h4>
-                              <h5 class="media-heading"> by <a href="#">Gordon Ramsay</a></h5>
-                              <span>Category: </span><span class="text-success"><strong>Magazine</strong></span>
-                          </div>
-                      </div></td>
-                      <td class="col-sm-1 col-md-1" style="text-align: center"></td>
-                      <td class="col-sm-1 col-md-1 text-center"> </td>
-                      <td class="col-sm-1 col-md-1 text-center"> </td>
-                      <td class="col-sm-1 col-md-1">
-                      <button type="button" class="btn btn-danger">
-                          <span class="glyphicon glyphicon-remove"></span> Remove
-                      </button></td>
-                  </tr>
+              	</c:forEach>
 
                   <tr>
                       <td>   </td>
                       <td>   </td>
-                      <td>   </td>
-                      <td><h5>Total Books</h5></td>
-                      <td class="text-right"><h5><strong>2</strong></h5></td>
-                  </tr>
-                  <tr>
-                      <td>   </td>
-                      <td>   </td>
-                      <td>   </td>
                       <td><h3>Return by</h3></td>
-                      <td class="text-right"><h3><strong>07/11/2017</strong></h3></td>
+                      <td class="text-right"><h5><${dateExpectReturn}</h5></td>
                   </tr>
                   <tr>
                       <td>   </td>
                       <td>   </td>
                       <td>   </td>
                       <td>
-                      <button type="button" class="btn btn-default">
-                          <span class="glyphicon glyphicon-shopping-cart"></span> Continue Shopping
-                      </button></td>
-                      <td>
-                      <button type="button" class="btn btn-success">
-                          Checkout <span class="glyphicon glyphicon-play"></span>
+                      <button type="button" class="btn btn-success" id="confirmbtn">
+                          Confirm Reservation <span class="glyphicon glyphicon-play"></span>
                       </button></td>
                   </tr>
               </tbody>
@@ -167,15 +157,33 @@
       </div>
   </div>
     </div>
+    
+    <form action="ConfirmReservation" method="POST" id="confirm">
+    	<input type="hidden" id="borrowedIDs" name = "borrowedIDs">
+    </form>
 
     <!-- Scripts -->
     <script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/navbar.js"></script>
-
-
-
+	
+	<script type="text/javascript">
+		var catalogs = "";
+		$(document).on("click", "#removebtn", function() {
+			var id = $(this).data("id");
+			$("#"+id).remove();
+		});
+		
+		$(document).on("click", "#confirmbtn", function() {
+			$("tr.reservedCatalogs").each(function() {
+				catalogs += this.id + " ";
+			});
+			$("#borrowedIDs").val(catalogs);
+			console.log(catalogs);
+			$("#confirm").submit();
+		});
+	</script>
 </body>
 
 </html>

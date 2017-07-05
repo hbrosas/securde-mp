@@ -21,11 +21,9 @@ public class BorrowManager {
 
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		int accountID = 0;
+		int borrowID = 0;
 		try {
 			pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-			rs = pstmt.getGeneratedKeys();
 			pstmt.setInt(1, brwhistory.getCatalogId());
 			pstmt.setInt(2, brwhistory.getStatusId());
 			pstmt.setInt(3, brwhistory.getAccountId());
@@ -33,18 +31,22 @@ public class BorrowManager {
 			pstmt.setString(5, brwhistory.getDateExpectReturn());
 			pstmt.executeUpdate();
 			
-			while(rs.next()) {
-				accountID = rs.getInt(BorrowHistory.COLUMN_CATALOGID);
-			}
+			try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
+	            if (generatedKeys.next()) {
+	            	borrowID = generatedKeys.getInt(1);
+	            }
+	            else {
+	                throw new SQLException("Creating user failed, no ID obtained.");
+	            }
+	        }
 			
-			return accountID;
+			return borrowID;
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			try {
-				rs.close();
 				pstmt.close();
 				conn.close();
 			} catch (SQLException e) {

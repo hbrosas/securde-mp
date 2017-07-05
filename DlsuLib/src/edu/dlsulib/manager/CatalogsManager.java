@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import edu.dlsulib.beans.Catalog;
+import edu.dlsulib.beans.ReserveHistory;
 import edu.dlsulib.beans.Catalog;
 import edu.dlsulib.db.DBPool;
 
@@ -50,6 +51,37 @@ public class CatalogsManager {
 			}
 		}
 		
+	}
+	
+	public static void ChangeStatus(int catalogID, int statusID, int borrower) {
+		String sql = "UPDATE " + Catalog.TABLE_NAME + " SET "
+			    + Catalog.COLUMN_STATUSID + "=?, " + Catalog.COLUMN_CURRENTBORROWID
+				+ "=? WHERE "+ Catalog.COLUMN_CATALOGID +" =?;";
+		
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ReserveHistory reservehistory = new ReserveHistory();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(3, catalogID);
+			pstmt.setInt(1, statusID);
+			pstmt.setInt(2, borrower);
+			pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	public static ArrayList<Catalog> GetAllCatalogs() {
@@ -130,6 +162,89 @@ public class CatalogsManager {
 	public static boolean EditCatalog(Catalog catalog) {
 		
 		return false;
+	}
+	
+	public static ArrayList<Catalog> SearchCatalog(String value, String by, int type) {
+		String sql = "SELECT * FROM " + Catalog.TABLE_NAME + " WHERE ";
+		String keyword = "%" + value + "%";
+		if(by.equalsIgnoreCase("title")) {
+			if(type != -1) { // meron type
+				sql += Catalog.COLUMN_TITLE + " LIKE ? AND " + Catalog.COLUMN_TYPEID + " =?;";
+			} else {
+				sql += Catalog.COLUMN_TITLE + " LIKE ?;";
+			}
+		} else if(by.equalsIgnoreCase("location")) {
+			if(type != -1) { // meron type
+				sql += Catalog.COLUMN_LOCATION + " LIKE ? AND " + Catalog.COLUMN_TYPEID + " =?;";
+			} else {
+				sql += Catalog.COLUMN_LOCATION + " LIKE ?;";
+			}
+		} else if(by.equalsIgnoreCase("author")) {
+			if(type != -1) { // meron type
+				sql += Catalog.COLUMN_AUTHOR + " LIKE ? AND " + Catalog.COLUMN_TYPEID + " =?;";
+			} else {
+				sql += Catalog.COLUMN_AUTHOR + " LIKE ?;";
+			}
+		} else if(by.equalsIgnoreCase("publisher")) {
+			if(type != -1) { // meron type
+				sql += Catalog.COLUMN_PUBLISHER + " LIKE ? AND " + Catalog.COLUMN_TYPEID + " =?;";
+			} else {
+				sql += Catalog.COLUMN_PUBLISHER + " LIKE ?;";
+			}
+		} else if(by.equalsIgnoreCase("tags")) {
+			if(type != -1) { // meron type
+				sql += Catalog.COLUMN_TAGS + " LIKE ? AND " + Catalog.COLUMN_TYPEID + " =?;";
+			} else {
+				sql += Catalog.COLUMN_TAGS + " LIKE ?;";
+			}
+		}
+		
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ArrayList<Catalog> srchdcatalogs = new ArrayList<>();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			if(type != -1) {
+				pstmt.setString(1, keyword);
+				pstmt.setInt(2, type);
+			} else pstmt.setString(1, keyword);
+				
+			rs = pstmt.executeQuery();
+
+			while(rs.next()) {
+				Catalog catalog2 = new Catalog();
+				catalog2.setCatalogId(rs.getInt(Catalog.COLUMN_CATALOGID));
+				catalog2.setTypeId(rs.getInt(Catalog.COLUMN_TYPEID));
+				catalog2.setStatusId(rs.getInt(Catalog.COLUMN_STATUSID));
+				catalog2.setCurrentBorrowId(rs.getInt(Catalog.COLUMN_CURRENTBORROWID));
+				catalog2.setTitle(rs.getString(Catalog.COLUMN_TITLE));
+				catalog2.setAuthor(rs.getString(Catalog.COLUMN_AUTHOR));
+				catalog2.setPublisher(rs.getString(Catalog.COLUMN_PUBLISHER));
+				catalog2.setYear(rs.getString(Catalog.COLUMN_YEAR));
+				catalog2.setTags(rs.getString(Catalog.COLUMN_TAGS));
+				catalog2.setLocation(rs.getString(Catalog.COLUMN_LOCATION));
+				srchdcatalogs.add(catalog2);
+			}
+			
+			return srchdcatalogs;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return null;
 	}
 	
 	public static Catalog GetCatalog(int catalogid) {
