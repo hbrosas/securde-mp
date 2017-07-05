@@ -10,7 +10,7 @@ import edu.dlsulib.beans.UserProfile;
 import edu.dlsulib.db.DBPool;
 
 public class ProfileManager {
-	public static void CreateProfile(UserProfile userprofile) {
+	public static int CreateProfile(UserProfile userprofile) {
 	String sql = "INSERT INTO " + UserProfile.TABLE_NAME + " ( " + UserProfile.COLUMN_USERID + "," + UserProfile.COLUMN_ACCOUNTID + ","
 			+ UserProfile.COLUMN_FIRSTNAME + "," + UserProfile.COLUMN_LASTNAME + "," + UserProfile.COLUMN_MIDDLENAME + ","
 			+ UserProfile.COLUMN_IDNUMBER + "," + UserProfile.COLUMN_BIRTHDATE + "," + UserProfile.COLUMN_BIRTHMONTH 
@@ -32,7 +32,11 @@ public class ProfileManager {
 		pstmt.setInt(7, userprofile.getBirthDate());
 		pstmt.setInt(8, userprofile.getBirthMonth());
 		pstmt.setInt(9, userprofile.getBirthYear());
-		pstmt.executeUpdate();
+		rs = pstmt.executeQuery();
+		
+		if(rs.next()) {
+			userId = rs.getInt(UserProfile.COLUMN_ACCOUNTID);
+		}
 		
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
@@ -90,24 +94,29 @@ public class ProfileManager {
 		}
 		
 	}
-	public static int GetProfile(int profileid) {
-		String sql = "SELECT " + " * " + " FROM " + UserProfile.TABLE_NAME + " WHERE " + UserProfile.COLUMN_USERID + " LIKE "
-				+ "?" + ";";
+	public static UserProfile GetProfile(int profileid) {
+		String sql = "SELECT * FROM " + UserProfile.TABLE_NAME + " WHERE " + UserProfile.COLUMN_USERID + " LIKE ?;";
 		
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		int Accountid = 0;
-		
+		UserProfile profile = new UserProfile();
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			pstmt.setInt(1, profileid);
 			
-			
 			if(rs.next()) {
-				Accountid = rs.getInt(UserProfile.COLUMN_ACCOUNTID);
+				profile.setUserId(rs.getInt(UserProfile.COLUMN_USERID));
+				profile.setAccountId(rs.getInt(UserProfile.COLUMN_ACCOUNTID));
+				profile.setFirstname(rs.getString(UserProfile.COLUMN_FIRSTNAME));
+				profile.setMiddlename(rs.getString(UserProfile.COLUMN_MIDDLENAME));
+				profile.setLastname(rs.getString(UserProfile.COLUMN_LASTNAME));
+				profile.setIdNumber(rs.getString(UserProfile.COLUMN_IDNUMBER));
+				profile.setBirthDate(rs.getInt(UserProfile.COLUMN_BIRTHDATE));
+				profile.setBirthDate(rs.getInt(UserProfile.COLUMN_BIRTHMONTH));
+				profile.setBirthDate(rs.getInt(UserProfile.COLUMN_BIRTHYEAR));
 			}
 			
 		} catch (SQLException e) {
@@ -124,7 +133,7 @@ public class ProfileManager {
 			}
 		}
 		
-		return Accountid;
+		return profile;
 		
 		
 	}

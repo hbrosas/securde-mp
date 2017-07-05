@@ -29,6 +29,10 @@ public class UserProfile implements Serializable {
 		this.birthYear = birthYear;
 	}
 	
+	public UserProfile() {
+		// TODO Auto-generated constructor stub
+	}
+
 	private int userId, accountId;
 	private String firstname, middlename, lastname, idNumber;
 	private int birthDate, birthMonth, birthYear;
