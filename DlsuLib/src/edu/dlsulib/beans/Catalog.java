@@ -18,11 +18,9 @@ public class Catalog implements Serializable {
 	private int catalogId, statusId, typeId, currentBorrowId;
 	private String location, title,  author, publisher, year, tags;
 	
-	
-	public String getColumnTitle() {
-		return COLUMN_TITLE;
+	public String getTitle() {
+		return title;
 	}
-	
 	public int getCatalogId() {
 		return catalogId;
 	}

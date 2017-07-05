@@ -53,7 +53,7 @@ public class CatalogManager {
 	}
 	
 	public static ArrayList<Catalog> GetAllCatalogs() {
-		String sql = "SELECT " + "*" + " FROM " + Catalog.TABLE_NAME + ";";
+		String sql = "SELECT * FROM " + Catalog.TABLE_NAME + ";";
 		
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;

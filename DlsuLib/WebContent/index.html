@@ -98,6 +98,10 @@
 			</div>
 		</div>
 		<!-- login cont -->
+		
+		<form action="HomeServlet" method="POST" id="homeform">
+			<input type="hidden" id="justsomeshiz">
+		</form>
 
 	</div>
 	<!-- body -->
@@ -148,6 +152,9 @@
 					success: function(message) {
 						if(message == "error"){ 
 							$("#error-login").show();
+						} else {
+							$("#justsomeshiz").val("bleh bleh");
+							$("#homeform").submit();
 						}
 					}
 				});

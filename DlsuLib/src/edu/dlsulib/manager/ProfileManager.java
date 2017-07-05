@@ -144,8 +144,8 @@ public class ProfileManager {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
 			pstmt.setInt(1, profileid);
+			rs = pstmt.executeQuery();
 			
 			if(rs.next()) {
 				profile.setUserId(rs.getInt(UserProfile.COLUMN_USERID));

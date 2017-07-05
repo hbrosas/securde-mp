@@ -44,7 +44,7 @@
 					<li><a href="#" id="enable-search"><span class="glyphicon glyphicon-search"></span> Search</a></li>
 					<li><a href="cart.html"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hazel Brosas <span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${profile.lastname}, ${profile.firstname} &nbsp;<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="borrow_history.html">Borrow History</a></li>
 							<li><a href="#">Reservation History</a></li>
@@ -87,104 +87,57 @@
 	<div class="main-container">
 		<div class="container">
 			<table class="table table-striped table-bordered table-hover">
-				<tr>
-					<td class="catalog-info">
-						<h4 class="catalog-title">Catalog Title</h4>
-						<p>Author | Year</p>
-						<p>Publisher</p>
-					</td>
-					<td class="catalog-status">
-						<div class="catalog-status-cont">
-							<div class="status-cont">
-								<span class="status">Available</span>
-								<br>
-								<span class="date">01/01/2017</span>
+				<c:forEach var = "c" items = "${allCatalog}">
+					<tr class="catalog-row">
+						<td class="catalog-info">
+							<h4 class="catalog-title">${c.title}</h4>
+							<p>${c.author} | ${c.year}</p>
+							<p>${c.publisher}</p>
+						</td>
+						<td class="catalog-status">
+							<div class="catalog-status-cont">
+								<div class="status-cont">
+									<c:if test="${c.statusId == 0}">
+										<span class="status">Out</span>
+									</c:if>
+									<c:if test="${c.statusId == 1}">
+										<span class="status">Available</span>
+										<!-- <span class="date">Reservation Date: ${reservationDate}</span>
+										<span class="date">Anticipated Return Date: ${anticipatedReturnDate}</span> -->
+									</c:if>
+									<c:if test="${c.statusId == 2}">
+										<span class="status">Reserved</span>
+									</c:if>
+									<c:if test="${c.statusId == 3}">
+										<span class="status">On-Hand</span>
+									</c:if>
+									<c:if test="${c.statusId == 4}">
+										<span class="status">Returned</span>
+									</c:if>
+									<br>
+								</div>
+								<button class="btn btn-block" id="viewdetails" data-id="${c.catalogId}" data-status="${c.statusId}" 
+										data-type="${c.typeId}" data-borrowId="${c.currentBorrowId}" data-location="${c.location}" data-title="${c.title}"
+										data-author="${c.author}" data-publisher="${c.publisher}" data-year="${c.year}" data-tags="${c.tags}">
+										View Details
+								</button>
 							</div>
-							<button class="btn btn-block" data-toggle="modal" data-target="#bookModal">View Details</button>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td class="catalog-info">
-						<h4 class="catalog-title">Catalog Title</h4>
-						<p>Author | Year</p>
-						<p>Publisher</p>
-					</td>
-					<td class="catalog-status">
-						<div class="catalog-status-cont">
-							<div class="status-cont">
-								<span class="status">Available</span>
-								<br>
-								<span class="date">01/01/2017</span>
-							</div>
-							<button class="btn btn-block" data-toggle="modal" data-target="#bookModal">View Details</button>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td class="catalog-info">
-						<h4 class="catalog-title">Catalog Title</h4>
-						<p>Author | Year</p>
-						<p>Publisher</p>
-					</td>
-					<td class="catalog-status">
-						<div class="catalog-status-cont">
-							<div class="status-cont">
-								<span class="status">Available</span>
-								<br>
-								<span class="date">01/01/2017</span>
-							</div>
-							<button class="btn btn-block" data-toggle="modal" data-target="#bookModal">View Details</button>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td class="catalog-info">
-						<h4 class="catalog-title">Catalog Title</h4>
-						<p>Author | Year</p>
-						<p>Publisher</p>
-					</td>
-					<td class="catalog-status">
-						<div class="catalog-status-cont">
-							<div class="status-cont">
-								<span class="status">Available</span>
-								<br>
-								<span class="date">01/01/2017</span>
-							</div>
-							<button class="btn btn-block" data-toggle="modal" data-target="#bookModal">View Details</button>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td class="catalog-info">
-						<h4 class="catalog-title">Catalog Title</h4>
-						<p>Author | Year</p>
-						<p>Publisher</p>
-					</td>
-					<td class="catalog-status">
-						<div class="catalog-status-cont">
-							<div class="status-cont">
-								<span class="status">Available</span>
-								<br>
-								<span class="date">01/01/2017</span>
-							</div>
-							<button class="btn btn-block">View Details</button>
-						</div>
-					</td>
-				</tr>
+						</td>
+					</tr>
+				</c:forEach>
 			</table>
 		</div>
 	</div>
 
 	<!-- Modal -->
-	<div class="modal fade modal-book" id="bookModal" role="dialog">
+	<div class="modal fade modal-book" id="bookModal">
 		<div class="modal-dialog">
-
+			<input type="hidden" id="modal-id">
 			<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h1 class="modal-title">How to be badass</h1>
+					<h1 class="modal-title" id = "modal-title">How to be badass</h1>
 				</div>
 				<div class="modal-body">
 					<div class="row">
@@ -192,14 +145,20 @@
 							<img src="images/book.png" class="img-responsive" alt="Responsive image">
 						</div>
 						<div class="col-md-9">
-							<p>by John Wick</p>
-							<p style="font-style: italic;">type: book</p>
-							<span class="label label-success">Available</span></div>
+							<p id="modal-author">John Wick</p>
+							<p style="font-style: italic;" id="modal-type">type: book</p>
+							<span class="label label-success" id="modal-status">Available</span></div>
 					</div>
 
-					<h2>Overview</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-						dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+					<h2>Catalog Details</h2>
+					<h4>Publisher</h4>
+					<p id="modal-publisher">I am Publisher</p>
+					<h4>Year</h4>
+					<p id="modal-year">2017</p>
+					<h4>Location</h4>
+					<p id="modal-location">123.123</p>
+					<h4>Tags</h4>
+					<p id="modal-tags">Hello, Hello2, Hello3</p>
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -222,6 +181,45 @@
 
 	<!-- List Catalog Script -->
 	<script type="text/javascript" src="js/list-catalog.js">
+	</script>
+	
+	<script type="text/javascript">
+		$(document).on("click", "#viewdetails", function () {
+			console.log("clicked");
+			var element = $(this);
+			
+			var id = element.data("id");
+	        var title = element.data("title");
+			var statusID = element.data("status");
+			var typeID = element.data("type");
+			var location = element.data("location");
+			var author = element.data("author");
+			var publisher = element.data("publisher");
+			var year = element.data("year");
+			var tags = element.data("tags");
+			
+			$("#modal-title").text(title);
+			$("#modal-author").text(author);
+			$("#modal-location").text(location);
+			$("#modal-publisher").text(publisher);
+			$("#modal-year").text(year);
+			$("#modal-tags").text(tags);
+			$("#modal-id").text(id);
+			
+			if(typeID == 1)
+				$("#modal-type").text("Type: Book");
+			else if(typeID == 2)
+				$("#modal-type").text("Type: Magazine");
+			else if(typeID == 3)
+				$("#modal-type").text("Type: Thesis");
+			
+			if(statusID == 0)
+				$("#modal-status").text("Out");
+			else if (statusID == 1)
+				$("#modal-status").text("Available");
+			
+			$("#bookModal").modal('toggle');
+	    });
 	</script>
 </body>
 
