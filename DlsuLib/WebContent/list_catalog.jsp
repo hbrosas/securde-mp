@@ -116,7 +116,7 @@
 									</c:if>
 									<br>
 								</div>
-								<button class="btn btn-block" id="viewdetails" data-id="${c.catalogId}" data-status="${c.statusId}" 
+								<button class="btn btn-block" id="viewdetails" data-userid="${account.accountId}" data-id="${c.catalogId}" data-status="${c.statusId}" 
 										data-type="${c.typeId}" data-borrowId="${c.currentBorrowId}" data-location="${c.location}" data-title="${c.title}"
 										data-author="${c.author}" data-publisher="${c.publisher}" data-year="${c.year}" data-tags="${c.tags}">
 										View Details
@@ -184,42 +184,74 @@
 	</script>
 	
 	<script type="text/javascript">
+		var id, title, statusID, typeID, accountID;
+		var location, author, publisher, year, tags;
+		
+		var modalTitle = $("#modal-title");
+		var modalAuthor = $("#modal-author");
+		var modalLocation = $("#modal-location");
+		var modalPublisher = $("#modal-publisher");
+		var modalYear = $("#modal-year");
+		var modalTags = $("#modal-tags");
+		var modalId = $("#modal-id");
+		var modalType = $("#modal-type");
+		var modalStatus = $("#modal-status");
+		var catalogModal = $("#bookModal");
+	
 		$(document).on("click", "#viewdetails", function () {
 			console.log("clicked");
 			var element = $(this);
 			
-			var id = element.data("id");
-	        var title = element.data("title");
-			var statusID = element.data("status");
-			var typeID = element.data("type");
-			var location = element.data("location");
-			var author = element.data("author");
-			var publisher = element.data("publisher");
-			var year = element.data("year");
-			var tags = element.data("tags");
+			accountId = element.data("accountId");
+			id = element.data("id");
+	        title = element.data("title");
+			statusID = element.data("status");
+			typeID = element.data("type");
+			location = element.data("location");
+			author = element.data("author");
+			publisher = element.data("publisher");
+			year = element.data("year");
+			tags = element.data("tags");
 			
-			$("#modal-title").text(title);
-			$("#modal-author").text(author);
-			$("#modal-location").text(location);
-			$("#modal-publisher").text(publisher);
-			$("#modal-year").text(year);
-			$("#modal-tags").text(tags);
-			$("#modal-id").text(id);
+			modalTitle.text(title);
+			modalAuthor.text(author);
+			modalLocation.text(location);
+			modalPublisher.text(publisher);
+			modalYear.text(year);
+			modalTags.text(tags);
+			modalId.text(id);
 			
 			if(typeID == 1)
-				$("#modal-type").text("Type: Book");
+				modalType.text("Type: Book");
 			else if(typeID == 2)
-				$("#modal-type").text("Type: Magazine");
+				modalType.text("Type: Magazine");
 			else if(typeID == 3)
-				$("#modal-type").text("Type: Thesis");
+				modalType.text("Type: Thesis");
 			
 			if(statusID == 0)
-				$("#modal-status").text("Out");
+				modalStatus.text("Out");
 			else if (statusID == 1)
-				$("#modal-status").text("Available");
+				modalStatus.text("Available");
 			
-			$("#bookModal").modal('toggle');
+			catalogModal.modal('toggle');
 	    });
+		
+		$('#reserveButton').click(function(){
+			$.ajax({
+				type: "post",
+				url: 'ReservationServlet',
+				data: {
+					"catalogid":id, "accountid":accountId
+				},
+				success: function(message) {
+					if(message == "error"){ 
+						$("#error-login").show();
+					} else {
+						swal(title, "has been added to your cart", "success");
+					}
+				}
+			});
+		});
 	</script>
 </body>
 
