@@ -15,6 +15,7 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link href="css/list-catalog-style.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="css/sweetalert.css">
+  <link rel="stylesheet" href="css/jquery.dataTables.min.css">
 </head>
 
 <body>
@@ -35,7 +36,7 @@
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav">
 					<li><a href="#">Reserve Meeting Room</a></li>
-					<li class="active"><a href="list_catalog.html"> Catalog List <span class="sr-only">(current)</span></a></li>
+					<li><a href="list_catalog.html"> Catalog List <span class="sr-only">(current)</span></a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
@@ -74,7 +75,7 @@
 					 					<option value="Thesis">Thesis</option>
 					 				</select>
 						</div>
-						<button type="submit" class="btn btn-default" style="width: 100px;">Submit</button>
+						<a href="search_catalog.html" type="button" class="btn btn-default" style="width: 100px;">Submit</a>
 					</form>
 				</li>
 			</ul>
@@ -82,96 +83,30 @@
 		<!-- /.container-fluid -->
 	</nav>
 
-	<div class="main-container">
-		<div class="container">
-			<table class="table table-striped table-bordered table-hover">
-				<tr>
-					<td class="catalog-info">
-						<h4 class="catalog-title">Catalog Title</h4>
-						<p>Author | Year</p>
-						<p>Publisher</p>
-					</td>
-					<td class="catalog-status">
-						<div class="catalog-status-cont">
-							<div class="status-cont">
-								<span class="status">Available</span>
-								<br>
-								<span class="date">01/01/2017</span>
-							</div>
-							<button class="btn btn-block" data-toggle="modal" data-target="#bookModal">View Details</button>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td class="catalog-info">
-						<h4 class="catalog-title">Catalog Title</h4>
-						<p>Author | Year</p>
-						<p>Publisher</p>
-					</td>
-					<td class="catalog-status">
-						<div class="catalog-status-cont">
-							<div class="status-cont">
-								<span class="status">Available</span>
-								<br>
-								<span class="date">01/01/2017</span>
-							</div>
-							<button class="btn btn-block" data-toggle="modal" data-target="#bookModal">View Details</button>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td class="catalog-info">
-						<h4 class="catalog-title">Catalog Title</h4>
-						<p>Author | Year</p>
-						<p>Publisher</p>
-					</td>
-					<td class="catalog-status">
-						<div class="catalog-status-cont">
-							<div class="status-cont">
-								<span class="status">Available</span>
-								<br>
-								<span class="date">01/01/2017</span>
-							</div>
-							<button class="btn btn-block" data-toggle="modal" data-target="#bookModal">View Details</button>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td class="catalog-info">
-						<h4 class="catalog-title">Catalog Title</h4>
-						<p>Author | Year</p>
-						<p>Publisher</p>
-					</td>
-					<td class="catalog-status">
-						<div class="catalog-status-cont">
-							<div class="status-cont">
-								<span class="status">Available</span>
-								<br>
-								<span class="date">01/01/2017</span>
-							</div>
-							<button class="btn btn-block" data-toggle="modal" data-target="#bookModal">View Details</button>
-						</div>
-					</td>
-				</tr>
-				<tr>
-					<td class="catalog-info">
-						<h4 class="catalog-title">Catalog Title</h4>
-						<p>Author | Year</p>
-						<p>Publisher</p>
-					</td>
-					<td class="catalog-status">
-						<div class="catalog-status-cont">
-							<div class="status-cont">
-								<span class="status">Available</span>
-								<br>
-								<span class="date">01/01/2017</span>
-							</div>
-							<button class="btn btn-block">View Details</button>
-						</div>
-					</td>
-				</tr>
-			</table>
-		</div>
+	<div class="main-container container" style="border:solid;">
+    <h2>Displaying results for 'Singing'</h2>
+    <br>
+    <table id="search-table" class="display" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Category</th>
+          <th>Availability</th>
+          <th> </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>Singing in the rain</td>
+          <td>Rihanna</td>
+          <td>Magazine</td>
+          <td><span class="label label-primary">Available</span></td>
+          <td><button class="btn btn-block" data-toggle="modal" data-target="#bookModal">View Details</button></td>
+        </tr>
+      </tbody>
+    </table>
 	</div>
 
 	<!-- Modal -->
@@ -201,7 +136,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-success" id="reserveButton">Add to Cart</button>
+					<button type="button" class="btn btn-success" id="reserveButton">Reserve</button>
 				</div>
 			</div>
 		</div>
@@ -218,16 +153,11 @@
 	<!-- Sweet Alert -->
 	<script type="text/javascript" src="js/sweetalert.min.js"></script>
 
-	<!-- List Catalog Script -->
-	<script type="text/javascript" src="js/list-catalog.js">
-	</script>
+  <!-- JQuery Data Tables -->
+  <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
 
-	<script type="text/javascript">
-		$('#reserveButton').click(function(){
-		  swal("How to be badass", "has been added to your cart", "success")
-		});
-
-	</script>
+  <!-- Search Catalog Script -->
+  <script type="text/javascript" src="js/search-catalog.js"></script>
 </body>
 
 </html>
