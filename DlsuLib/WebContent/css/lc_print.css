@@ -1,0 +1,90 @@
+/* Print css for LibCal */
+
+/* hide a lot of stuff */
+body { background: #ffffff !important; font-size: 10pt; }
+#contentright, #banner, #bannerlink, .topnav, .pagedesc, hr, #footer_support_link, #mobile_link, #footer, #loading, #share, #stitlecontent, #proRSS, #pro_sch, #pro_schlink,
+#sp_toolbarwrap, #stats-formtb, #cal_admin_left, #tabbedmenu, #cal_wrapper, #lc_app_popup, #timelink, #rm_left, #rm_right, #cal_nav_bottom, #cal_right, #cal_nav_top span , 
+.room-explorer-fields, .rm_page_nav { display: none; }
+
+#container, #wrapper { background-image: none; width: auto; border: none; }
+
+#contentxwide { background-image: none; width: auto; margin: 0; border: 0; }
+
+#footer { border: 0; text-align: left; width: auto; }
+
+.room-explorer { border-collapse: collapse; border: 1px solid #ccc; font-size: 10pt; }
+.room-explorer td { border-right: 1px solid #ccc; border-left: 1px solid #ccc; font-size: 10pt; }
+.room-explorer tr, .room-explorer th  { border: 1px solid #ccc; font-size: 10pt; }
+
+/* show the url after links */
+#cal-outer a:link:after, #cal-outer a:visited:after {
+   content: " (" attr(href) ") ";
+    font-size: 90%;
+}
+#filters, #pfilter, #public_filter, #cal_settings, .ui-multiselect-menu { display: none; }
+
+h1 #friendly, h1 #status { font-size: 10pt!important; }
+
+.fc-header-left, .fc-header-right { visibility:hidden; }
+#add_new, #print { display: none;}
+
+
+/*
+ * FullCalendar v1.5.4 Print Stylesheet
+ *
+ *
+ * Copyright (c) 2011 Adam Shaw
+ * Dual licensed under the MIT and GPL licenses, located in
+ * MIT-LICENSE.txt and GPL-LICENSE.txt respectively.
+ *
+ * Date: Tue Sep 4 23:38:33 2012 -0700
+ *
+ */
+ 
+ 
+ /* Events
+-----------------------------------------------------*/
+ 
+.fc-event-skin {
+
+	/* background: none !important; */
+	color: #000 !important;
+	
+	}
+	
+/* horizontal events */
+	
+.fc-event-hori {
+/*
+	border-width: 0 0 1px 0 !important;
+	border-bottom-style: dotted !important;
+	border-bottom-color: #000 !important;
+	padding: 1px 0 0 0 !important; */
+	}
+	
+.fc-event-hori .fc-event-inner {
+	border-width: 0 !important;
+	padding: 0 1px !important;
+	}
+	
+/* vertical events */
+	
+.fc-event-vert {
+	border-width: 0 0 0 1px !important;
+	border-left-style: dotted !important;
+	border-left-color: #000 !important;
+	padding: 0 1px 0 0 !important;
+	}
+	
+.fc-event-vert .fc-event-inner {
+	border-width: 0 !important;
+	padding: 1px 0 !important;
+	}
+	
+.fc-event-bg {
+	display: none !important;
+	}
+	
+.fc-event .ui-resizable-handle {
+	display: none !important;
+	}

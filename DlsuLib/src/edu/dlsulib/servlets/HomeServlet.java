@@ -9,10 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import edu.dlsulib.beans.Catalog;
-import edu.dlsulib.beans.UserAccount;
-import edu.dlsulib.manager.AccountManager;
-import edu.dlsulib.manager.CatalogManager;
+import edu.dlsulib.beans.*;
+import edu.dlsulib.manager.*;
 
 /**
  * Servlet implementation class HomeServlet
@@ -37,8 +35,30 @@ public class HomeServlet extends HttpServlet {
 		ArrayList<Catalog> allCatalog = CatalogManager.GetAllCatalogs();
 		request.setAttribute("allCatalog", allCatalog);
 		
-		int userid = Integer.parseInt(request.getSession().getAttribute("userid").toString());
-		UserAccount a = AccountManager.GetAccountDetails(userid);
+		int accountId = Integer.parseInt(request.getSession().getAttribute("userid").toString());
+		UserAccount account = AccountManager.GetAccountDetails(accountId);
+		UserProfile profile = ProfileManager.GetProfile(account.getUserId());
+		request.setAttribute("account", account);
+		request.setAttribute("profile", profile);
+		
+		// Get Role
+		switch(account.getRoleId()) {
+		case 1: // student
+				request.getRequestDispatcher("list_catalog.jsp").forward(request, response);
+				break;
+		case 2: // Library Manager
+				// dispatch
+				break;
+		case 3: // Library Staff
+				// dispatch
+				break;
+		case 4: // Administrator
+				// dispatch
+				break;
+		case 5: // Employee
+				// dispatch
+				break;
+		}
 	}
 
 	/**
