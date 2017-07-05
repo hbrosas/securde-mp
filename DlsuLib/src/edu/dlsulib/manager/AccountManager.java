@@ -10,7 +10,7 @@ import edu.dlsulib.beans.UserAccount;
 import edu.dlsulib.db.DBPool;
 
 public class AccountManager {
-	public static ArrayList<Integer> GetAllAccounts() {
+	public static ArrayList<UserAccount> GetAllAccounts() {
 		String sql = "SELECT " + " * " + " FROM " + UserAccount.TABLE_NAME
 				 + ";";
 		
@@ -48,7 +48,7 @@ public class AccountManager {
 			}
 		}
 		
-		return accountIds;
+		return account;
 	}	
 	
 	public static int CreateAccount(int userid, int accountid, int roleid, String username, String password, String email, int sqid, String sqans) {
@@ -94,8 +94,8 @@ public class AccountManager {
 	
 	public static int LoginAccount(String value, String password) {
 		String sql = "SELECT " + " * " + " FROM " + UserAccount.TABLE_NAME + " WHERE " + UserAccount.COLUMN_USERNAME + " LIKE "
-				+ value + " OR " + UserAccount.COLUMN_EMAILADDRESS + " LIKE " + value + " AND " + UserAccount.COLUMN_PASSWORD
-				 + password + ";";
+				+ "?" + " OR " + UserAccount.COLUMN_EMAILADDRESS + " LIKE " + "?" + " AND " + UserAccount.COLUMN_PASSWORD
+				 + "?" + ";";
 		
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
@@ -105,8 +105,11 @@ public class AccountManager {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
 
+			pstmt.setString(1, value);
+			pstmt.setString(2, value);
+			pstmt.setString(3, password);
+			rs = pstmt.executeQuery();
 			if(rs.next()) {
 				Accountid = rs.getInt(0);
 			}
@@ -130,7 +133,7 @@ public class AccountManager {
 	
 	public static int EditAccount(UserAccount useraccount) {
 		String sql = "SELECT " + " * " + " FROM " + UserAccount.TABLE_NAME + " WHERE " + UserAccount.COLUMN_USERNAME + " LIKE "
-				+ useraccount.getUsername() + " OR " + UserAccount.COLUMN_EMAILADDRESS + " LIKE " + useraccount.getEmailAddress() + " AND " + useraccount.getPassword()
+				+ "?" + " OR " + UserAccount.COLUMN_EMAILADDRESS + " LIKE " + "?" + " AND " + "?"
 				 + ";";
 		
 		Connection conn = DBPool.getInstance().getConnection();
@@ -141,8 +144,12 @@ public class AccountManager {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
 
+			pstmt.setString(1, useraccount.getUsername());
+			pstmt.setString(2, useraccount.getEmailAddress());
+			pstmt.setString(3, useraccount.getPassword());
+			rs = pstmt.executeQuery();
+			
 			if(rs.next()) {
 				Accountid = rs.getInt(UserAccount.COLUMN_ACCOUNTID);
 			}
@@ -166,8 +173,8 @@ public class AccountManager {
 	
 	public static int ForgotPasswordAccount(String value, String sqid, String sqans) {
 		String sql = "SELECT " + " * " + " FROM " + UserAccount.TABLE_NAME + " WHERE " + UserAccount.COLUMN_USERNAME + " LIKE "
-				+ value + " OR " + UserAccount.COLUMN_EMAILADDRESS + " LIKE " + value + " AND " + UserAccount.COLUMN_SQID + " = "
-				 + sqid + " AND " + UserAccount.COLUMN_SQANSWER + ";";
+				+ "?" + " OR " + UserAccount.COLUMN_EMAILADDRESS + " LIKE " + "?" + " AND " + UserAccount.COLUMN_SQID + " LIKE "
+				 + "?" + " AND " + UserAccount.COLUMN_SQANSWER + " LIKE " + "?" + ";";
 		
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
@@ -177,6 +184,10 @@ public class AccountManager {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, value);
+			pstmt.setString(2, value);
+			pstmt.setString(3, sqid);
+			pstmt.setString(4, sqans);
 			rs = pstmt.executeQuery();
 
 			if(rs.next()) {
@@ -202,8 +213,8 @@ public class AccountManager {
 	
 	public static int GetAccountDetails(String value, String password) {
 		String sql = "SELECT " + " * " + " FROM " + UserAccount.TABLE_NAME + " WHERE " + UserAccount.COLUMN_USERNAME + " LIKE "
-				+ value + " OR " + UserAccount.COLUMN_EMAILADDRESS + " LIKE " + value + " AND " + UserAccount.COLUMN_PASSWORD
-				 + password + ";";
+				+ "?" + " OR " + UserAccount.COLUMN_EMAILADDRESS + " LIKE " + "?" + " AND " + UserAccount.COLUMN_PASSWORD
+				 + "?" + ";";
 		
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
@@ -213,6 +224,9 @@ public class AccountManager {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, value);
+			pstmt.setString(2, value);
+			pstmt.setString(3, password);
 			rs = pstmt.executeQuery();
 
 			if(rs.next()) {

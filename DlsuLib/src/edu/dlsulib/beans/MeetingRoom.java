@@ -11,8 +11,20 @@ public class MeetingRoom implements Serializable {
 	public static final String COLUMN_STARTTIMESLOT = "startTimeslot";
 	public static final String COLUMN_ENDTIMESLOT = "endTimeslot";
 	
+
 	private int reserveId, roomId, statusId, roomTypeId;
 	private String startTimeslot, endTimeslot;
+	
+	public MeetingRoom(int reserveId, int roomId, int statusId, int roomTypeId, String startTimeslot,
+			String endTimeslot) {
+		super();
+		this.reserveId = reserveId;
+		this.roomId = roomId;
+		this.statusId = statusId;
+		this.roomTypeId = roomTypeId;
+		this.startTimeslot = startTimeslot;
+		this.endTimeslot = endTimeslot;
+	}
 	
 	public int getReserveId() {
 		return reserveId;
