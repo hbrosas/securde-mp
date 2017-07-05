@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import edu.dlsulib.beans.UserAccount;
 import edu.dlsulib.beans.UserProfile;
 import edu.dlsulib.db.DBPool;
 
@@ -22,7 +21,6 @@ public class ProfileManager {
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;	
 	int userId = 0;
-	
 	try {
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, userprofile.getUserId());
@@ -94,7 +92,7 @@ public class ProfileManager {
 	}
 	public static int GetProfile(int profileid) {
 		String sql = "SELECT " + " * " + " FROM " + UserProfile.TABLE_NAME + " WHERE " + UserProfile.COLUMN_USERID + " LIKE "
-				+ profileid + ";";
+				+ "?" + ";";
 		
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
@@ -105,9 +103,11 @@ public class ProfileManager {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
-
+			pstmt.setInt(1, profileid);
+			
+			
 			if(rs.next()) {
-				Accountid = rs.getInt(UserAccount.COLUMN_ACCOUNTID);
+				Accountid = rs.getInt(UserProfile.COLUMN_ACCOUNTID);
 			}
 			
 		} catch (SQLException e) {
@@ -129,7 +129,7 @@ public class ProfileManager {
 		
 	}
 	
-	public static int GetAllProfile(int profileid) {
+	public static ArrayList<UserProfile> GetAllProfile() {
 		String sql = "SELECT " + " * " + " FROM " + UserProfile.TABLE_NAME + ";";
 		
 		Connection conn = DBPool.getInstance().getConnection();
@@ -168,7 +168,7 @@ public class ProfileManager {
 			}
 		}
 		
-		return Accountid;
+		return userprofile;
 		
 		
 	}

@@ -88,7 +88,7 @@ public class CatalogManager {
 	
 	public static boolean DeleteCatalog(int catalogid) {
 		String sql = "DELETE " + "FROM" + Catalog.TABLE_NAME
-				 + " WHERE " + Catalog.COLUMN_CATALOGID + " LIKE " + catalogid + ";";
+				 + " WHERE " + Catalog.COLUMN_CATALOGID + " LIKE " + "?" + ";";
 		
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
@@ -96,7 +96,8 @@ public class CatalogManager {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			rs = pstmt.executeQuery();
+			pstmt.setInt(1, catalogid);
+			pstmt.executeUpdate();
 			
 			
 		} catch (SQLException e) {
@@ -122,7 +123,7 @@ public class CatalogManager {
 	}
 	
 	public static Catalog GetCatalog(int catalogid) {
-		String sql = "SELECT " + " * " + " FROM " + Catalog.TABLE_NAME + " WHERE " + Catalog.COLUMN_CATALOGID + " LIKE " + catalogid + ";";
+		String sql = "SELECT " + " * " + " FROM " + Catalog.TABLE_NAME + " WHERE " + Catalog.COLUMN_CATALOGID + " LIKE " + "?" + ";";
 		
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
@@ -131,6 +132,7 @@ public class CatalogManager {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, catalogid);
 			rs = pstmt.executeQuery();
 
 			if(rs.next()) {
