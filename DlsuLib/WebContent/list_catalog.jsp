@@ -42,9 +42,9 @@
 
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#" id="enable-search"><span class="glyphicon glyphicon-search"></span> Search</a></li>
-					<li><a href="cart.html"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
+					<li><button id="btncart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</button></li>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${profile.lastname}, ${profile.firstname} &nbsp;<span class="caret"></span></a>
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${profile.lastname}, ${profile.firstname}&nbsp;<span class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="borrow_history.html">Borrow History</a></li>
 							<li><a href="#">Reservation History</a></li>
@@ -96,28 +96,22 @@
 						</td>
 						<td class="catalog-status">
 							<div class="catalog-status-cont">
-								<div class="status-cont">
 									<c:if test="${c.statusId == 0}">
-										<span class="status">Out</span>
+										<div class="status-cont" style="background-color:#ef5350;">
+											<span class="status">Out</span>
+										</div>
 									</c:if>
 									<c:if test="${c.statusId == 1}">
-										<span class="status">Available</span>
-										<!-- <span class="date">Reservation Date: ${reservationDate}</span>
-										<span class="date">Anticipated Return Date: ${anticipatedReturnDate}</span> -->
-									</c:if>
-									<c:if test="${c.statusId == 2}">
-										<span class="status">Reserved</span>
-									</c:if>
-									<c:if test="${c.statusId == 3}">
-										<span class="status">On-Hand</span>
-									</c:if>
-									<c:if test="${c.statusId == 4}">
-										<span class="status">Returned</span>
+										<div class="status-cont" style="background-color:#81c784;">
+											<span class="status">Available</span>
+											<!-- <span class="date">Reservation Date: ${reservationDate}</span>
+											<span class="date">Anticipated Return Date: ${anticipatedReturnDate}</span> -->
+										</div>
 									</c:if>
 									<br>
 								</div>
 								<button class="btn btn-block" id="viewdetails" data-userid="${account.accountId}" data-id="${c.catalogId}" data-status="${c.statusId}" 
-										data-type="${c.typeId}" data-borrowId="${c.currentBorrowId}" data-location="${c.location}" data-title="${c.title}"
+										data-type="${c.typeId}" data-borrowId="${c.currentBorrowId}" data-loc="${c.location}" data-title="${c.title}"
 										data-author="${c.author}" data-publisher="${c.publisher}" data-year="${c.year}" data-tags="${c.tags}">
 										View Details
 								</button>
@@ -156,7 +150,7 @@
 					<h4>Year</h4>
 					<p id="modal-year">2017</p>
 					<h4>Location</h4>
-					<p id="modal-location">123.123</p>
+					<p id="modal-loc">1234</p>
 					<h4>Tags</h4>
 					<p id="modal-tags">Hello, Hello2, Hello3</p>
 				</div>
@@ -169,6 +163,11 @@
 
 	</div>
 	</div>
+	
+	<form action="ReservationServlet" method="POST" id="reserveForm">
+		<input type="hidden" id="brwid" name="borrowedIDs">
+		<input type="hidden" id="accountid" name="accountid" value="${account.accountId}">
+	</form>
 
 	<!-- Scripts -->
 	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
@@ -184,12 +183,13 @@
 	</script>
 	
 	<script type="text/javascript">
-		var id, title, statusID, typeID, accountID;
-		var location, author, publisher, year, tags;
+		var borrowIDs = "";
+		var id, title, statusID, typeID, accountid;
+		var loc, author, publisher, year, tags;
 		
 		var modalTitle = $("#modal-title");
 		var modalAuthor = $("#modal-author");
-		var modalLocation = $("#modal-location");
+		var modalLocation = $("#modal-loc");
 		var modalPublisher = $("#modal-publisher");
 		var modalYear = $("#modal-year");
 		var modalTags = $("#modal-tags");
@@ -202,12 +202,12 @@
 			console.log("clicked");
 			var element = $(this);
 			
-			accountId = element.data("accountId");
+			accountid = element.data("userid");
 			id = element.data("id");
 	        title = element.data("title");
 			statusID = element.data("status");
 			typeID = element.data("type");
-			location = element.data("location");
+			loc = element.data("loc");
 			author = element.data("author");
 			publisher = element.data("publisher");
 			year = element.data("year");
@@ -215,7 +215,7 @@
 			
 			modalTitle.text(title);
 			modalAuthor.text(author);
-			modalLocation.text(location);
+			modalLocation.text(loc);
 			modalPublisher.text(publisher);
 			modalYear.text(year);
 			modalTags.text(tags);
@@ -228,29 +228,27 @@
 			else if(typeID == 3)
 				modalType.text("Type: Thesis");
 			
-			if(statusID == 0)
+			if(statusID == 0){
 				modalStatus.text("Out");
-			else if (statusID == 1)
+				$('#reserveButton').prop("disabled", true);
+			}
+			else if (statusID == 1){
 				modalStatus.text("Available");
+				$('#reserveButton').prop("disabled", false);
+			}
 			
 			catalogModal.modal('toggle');
 	    });
 		
-		$('#reserveButton').click(function(){
-			$.ajax({
-				type: "post",
-				url: 'ReservationServlet',
-				data: {
-					"catalogid":id, "accountid":accountId
-				},
-				success: function(message) {
-					if(message == "error"){ 
-						$("#error-login").show();
-					} else {
-						swal(title, "has been added to your cart", "success");
-					}
-				}
-			});
+		$(document).on("click", "#reserveButton", function(){
+			borrowIDs = $("#brwid").val();
+			borrowIDs += id+" ";
+			$("#brwid").val(borrowIDs);
+			swal(title, "has been added to your cart", "success");
+		});
+		
+		$(document).on("click", "#btncart", function(){
+			$("#reserveForm").submit();
 		});
 	</script>
 </body>

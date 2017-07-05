@@ -1,6 +1,7 @@
 package edu.dlsulib.beans;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 public class BorrowHistory implements Serializable {
 	public static final String TABLE_NAME = "borrowhistory";

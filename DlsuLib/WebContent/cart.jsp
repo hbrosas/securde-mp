@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1">
-    <title>Search - De La Salle University - SHS Online Library</title>
+    <title>Cart - De La Salle University - SHS Online Library</title>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans|Lato" rel="stylesheet">
