@@ -11,16 +11,16 @@ import edu.dlsulib.db.DBPool;
 
 public class ProfileManager {
 	public static int CreateProfile(UserProfile userprofile) {
-	String sql = "INSERT INTO " + UserProfile.TABLE_NAME + " ( " + UserProfile.COLUMN_USERID + "," + UserProfile.COLUMN_ACCOUNTID + ","
-			+ UserProfile.COLUMN_FIRSTNAME + "," + UserProfile.COLUMN_LASTNAME + "," + UserProfile.COLUMN_MIDDLENAME + ","
-			+ UserProfile.COLUMN_IDNUMBER + "," + UserProfile.COLUMN_BIRTHDATE + "," + UserProfile.COLUMN_BIRTHMONTH 
-			+ ", " + UserProfile.COLUMN_BIRTHYEAR + ") " + " VALUES " 
-			 + " (?, ?, ?, ?, ?, ?, ?, ?, ?)" +";";
+	String sql = "INSERT INTO " + UserProfile.TABLE_NAME + " ( " 
+			+ UserProfile.COLUMN_ACCOUNTID + "," + UserProfile.COLUMN_FIRSTNAME + "," 
+			+ UserProfile.COLUMN_LASTNAME + "," + UserProfile.COLUMN_MIDDLENAME + ","
+			+ UserProfile.COLUMN_IDNUMBER + "," + UserProfile.COLUMN_BIRTHDATE + "," 
+			+ UserProfile.COLUMN_BIRTHMONTH + ", " + UserProfile.COLUMN_BIRTHYEAR 
+			+ ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
 	
 	Connection conn = DBPool.getInstance().getConnection();
 	PreparedStatement pstmt = null;
-	ResultSet rs = null;	
-	int userId = 0;
+	
 	try {
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setInt(1, userprofile.getUserId());
@@ -32,18 +32,13 @@ public class ProfileManager {
 		pstmt.setInt(7, userprofile.getBirthDate());
 		pstmt.setInt(8, userprofile.getBirthMonth());
 		pstmt.setInt(9, userprofile.getBirthYear());
-		rs = pstmt.executeQuery();
-		
-		if(rs.next()) {
-			userId = rs.getInt(UserProfile.COLUMN_ACCOUNTID);
-		}
+		pstmt.executeUpdate();
 		
 	} catch (SQLException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	} finally {
 		try {
-			rs.close();
 			pstmt.close();
 			conn.close();
 		} catch (SQLException e) {
@@ -52,6 +47,50 @@ public class ProfileManager {
 		}
 	}
 	
+	UserProfile profile = GetProfileUsingAccountId(userprofile.getAccountId());
+	return profile.getUserId();	
+}
+	
+	public static UserProfile GetProfileUsingAccountId(int accountId) {
+		String sql = "SELECT * FROM " + UserProfile.TABLE_NAME + " WHERE " + UserProfile.COLUMN_ACCOUNTID + " LIKE ?;";
+		
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		UserProfile profile = new UserProfile();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			pstmt.setInt(1, accountId);
+			
+			if(rs.next()) {
+				profile.setUserId(rs.getInt(UserProfile.COLUMN_USERID));
+				profile.setAccountId(rs.getInt(UserProfile.COLUMN_ACCOUNTID));
+				profile.setFirstname(rs.getString(UserProfile.COLUMN_FIRSTNAME));
+				profile.setMiddlename(rs.getString(UserProfile.COLUMN_MIDDLENAME));
+				profile.setLastname(rs.getString(UserProfile.COLUMN_LASTNAME));
+				profile.setIdNumber(rs.getString(UserProfile.COLUMN_IDNUMBER));
+				profile.setBirthDate(rs.getInt(UserProfile.COLUMN_BIRTHDATE));
+				profile.setBirthDate(rs.getInt(UserProfile.COLUMN_BIRTHMONTH));
+				profile.setBirthDate(rs.getInt(UserProfile.COLUMN_BIRTHYEAR));
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				rs.close();
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return profile;
 	}
 	
 	public static void EditProfile(UserProfile userprofile) {
@@ -94,6 +133,7 @@ public class ProfileManager {
 		}
 		
 	}
+	
 	public static UserProfile GetProfile(int profileid) {
 		String sql = "SELECT * FROM " + UserProfile.TABLE_NAME + " WHERE " + UserProfile.COLUMN_USERID + " LIKE ?;";
 		
@@ -134,8 +174,6 @@ public class ProfileManager {
 		}
 		
 		return profile;
-		
-		
 	}
 	
 	public static ArrayList<UserProfile> GetAllProfile() {
