@@ -10,7 +10,7 @@ import edu.dlsulib.beans.Catalog;
 import edu.dlsulib.beans.Catalog;
 import edu.dlsulib.db.DBPool;
 
-public class CatalogManager {
+public class CatalogsManager {
 	public static void CreateCatalog(int catid, int statusid, int typeid, int borrowid, String location, String title, String author, String publisher, String year, String tags) {
 		String sql = "INSERT INTO " + Catalog.TABLE_NAME + " ( " + Catalog.COLUMN_CATALOGID + "," + Catalog.COLUMN_STATUSID + ","
 				+ Catalog.COLUMN_TYPEID + "," + Catalog.COLUMN_CURRENTBORROWID + "," + Catalog.COLUMN_LOCATION + ","
@@ -132,63 +132,8 @@ public class CatalogManager {
 		return false;
 	}
 	
-	public static ArrayList<Catalog> SearchCatalog(String value) {
-		String sql = "SELECT " + " * " + " FROM " + Catalog.TABLE_NAME + " WHERE " + Catalog.COLUMN_TITLE + " LIKE %?% OR "
-																					+ Catalog.COLUMN_LOCATION + " LIKE %?% OR " 
-																					+ Catalog.COLUMN_AUTHOR + " LIKE %?% OR "
-																					+ Catalog.COLUMN_PUBLISHER + "LIKE %?% OR "
-																					+ Catalog.COLUMN_TAGS + ";";
-		
-		Connection conn = DBPool.getInstance().getConnection();
-		PreparedStatement pstmt = null;
-		ResultSet rs = null;
-		ArrayList<Catalog> srchdcatalogs = new ArrayList<>();
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, value);
-			pstmt.setString(2, value);
-			pstmt.setString(3, value);
-			pstmt.setString(4, value);
-			rs = pstmt.executeQuery();
-
-			while(rs.next()) {
-				Catalog catalog2 = new Catalog();
-				catalog2.setCatalogId(rs.getInt(Catalog.COLUMN_CATALOGID));
-				catalog2.setTypeId(rs.getInt(Catalog.COLUMN_TYPEID));
-				catalog2.setStatusId(rs.getInt(Catalog.COLUMN_STATUSID));
-				catalog2.setCurrentBorrowId(rs.getInt(Catalog.COLUMN_CURRENTBORROWID));
-				catalog2.setTitle(rs.getString(Catalog.COLUMN_TITLE));
-				catalog2.setAuthor(rs.getString(Catalog.COLUMN_AUTHOR));
-				catalog2.setPublisher(rs.getString(Catalog.COLUMN_PUBLISHER));
-				catalog2.setYear(rs.getString(Catalog.COLUMN_YEAR));
-				catalog2.setTags(rs.getString(Catalog.COLUMN_TAGS));
-				catalog2.setLocation(rs.getString(Catalog.COLUMN_LOCATION));
-				srchdcatalogs.add(catalog2);
-			}
-			return srchdcatalogs;
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			try {
-				rs.close();
-				pstmt.close();
-				conn.close();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
-		return null;
-	}
-	
-	
-	
 	public static Catalog GetCatalog(int catalogid) {
-		String sql = "SELECT " + " * " + " FROM " + Catalog.TABLE_NAME + " WHERE " + Catalog.COLUMN_CATALOGID + " LIKE " + "?" + ";";
+		String sql = "SELECT * FROM " + Catalog.TABLE_NAME + " WHERE " + Catalog.COLUMN_CATALOGID + " LIKE ?;";
 		
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
