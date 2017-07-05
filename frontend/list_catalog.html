@@ -36,17 +36,18 @@
 				<ul class="nav navbar-nav">
 					<li><a href="#">Reserve Meeting Room</a></li>
 					<li class="active"><a href="list_catalog.html"> Catalog List <span class="sr-only">(current)</span></a></li>
-					<li><a href="#" id="enable-search">Search Catalog</a></li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#" id="enable-search"><span class="glyphicon glyphicon-search"></span> Search</a></li>
+					<li><a href="cart.html"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Hazel Brosas <span class="caret"></span></a>
 						<ul class="dropdown-menu">
-							<li><a href="#">Borrow History</a></li>
+							<li><a href="borrow_history.html">Borrow History</a></li>
 							<li><a href="#">Reservation History</a></li>
 							<li role="separator" class="divider"></li>
-							<li><a href="#">Edit Profile</a></li>
+							<li><a href="edit_profile.html">Edit Profile</a></li>
 							<li><a href="#">Logout</a></li>
 						</ul>
 					</li>
@@ -56,11 +57,11 @@
 			</div>
 			<!-- /.navbar-collapse -->
 			<ul class="nav navbar-nav" id="search-navbar">
-				<li><a class="navbar-brand" href="#">Search Catalog</a></li>
 				<li>
 					<form class="navbar-form navbar-left" role="search">
 						<div class="form-group">
 							<select class="form-control">
+										<option value="Title">Title</option>
 					 					<option value="Location">Location</option>
 					 					<option value="Author">Author</option>
 					 					<option value="Publisher">Publisher</option>
@@ -219,7 +220,6 @@
 
 	<!-- List Catalog Script -->
 	<script type="text/javascript" src="js/list-catalog.js">
-
 	</script>
 </body>
 
