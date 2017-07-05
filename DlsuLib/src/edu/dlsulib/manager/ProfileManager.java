@@ -103,7 +103,6 @@ public class ProfileManager {
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;	
-		int userId = 0;
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
