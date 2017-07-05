@@ -1,11 +1,18 @@
 package edu.dlsulib.servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import edu.dlsulib.beans.Catalog;
+import edu.dlsulib.beans.UserAccount;
+import edu.dlsulib.manager.AccountManager;
+import edu.dlsulib.manager.CatalogManager;
 
 /**
  * Servlet implementation class HomeServlet
@@ -27,7 +34,11 @@ public class HomeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		ArrayList<Catalog> allCatalog = CatalogManager.GetAllCatalogs();
+		request.setAttribute("allCatalog", allCatalog);
+		
+		int userid = Integer.parseInt(request.getSession().getAttribute("userid").toString());
+		UserAccount a = AccountManager.GetAccountDetails(userid);
 	}
 
 	/**

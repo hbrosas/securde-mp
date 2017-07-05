@@ -10,6 +10,34 @@ import edu.dlsulib.beans.MeetingRoom;
 import edu.dlsulib.db.DBPool;
 
 public class RoomManager {
+	public static void ReserveRoom(int roomId, int reserveId) {
+		String sql = "UPDATE " + MeetingRoom.TABLE_NAME + " SET " + MeetingRoom.COLUMN_STATUSID + " =? AND "+ MeetingRoom.COLUMN_RESERVEID +" =? WHERE "+ MeetingRoom.COLUMN_ROOMID +" =? ;";
+		
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, 1);
+			pstmt.setInt(2, reserveId);
+			pstmt.setInt(3, roomId);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
 	public static MeetingRoom GetRoom(int roomid) {
 		String sql = "SELECT " + " * " + " FROM " + MeetingRoom.TABLE_NAME + " WHERE " + MeetingRoom.COLUMN_ROOMID + " LIKE "
 				+ "?" + ";";
@@ -90,8 +118,7 @@ public class RoomManager {
 	}
 	
 	public static MeetingRoom GetAllAvailableRooms() {
-		String sql = "SELECT " + " * " + " FROM " + MeetingRoom.TABLE_NAME + " WHERE " + MeetingRoom.COLUMN_RESERVEID + " LIKE "
-				+ "null" + ";";
+		String sql = "SELECT " + " * " + " FROM " + MeetingRoom.TABLE_NAME + " WHERE " + MeetingRoom.COLUMN_STATUSID + " LIKE ?;";
 		
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
@@ -99,7 +126,7 @@ public class RoomManager {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.set(1, null);
+			pstmt.setInt(1, 1);
 			rs = pstmt.executeQuery();
 
 			if(rs.next()) {
@@ -128,4 +155,29 @@ public class RoomManager {
 		return null;
 	}
 	
+	public static void ChangeToAvailable(int roomId) {
+		String sql = "UPDATE " + MeetingRoom.TABLE_NAME + " SET " + MeetingRoom.COLUMN_STATUSID + " =? WHERE "+ MeetingRoom.COLUMN_ROOMID +" =? ;";
+		
+		Connection conn = DBPool.getInstance().getConnection();
+		PreparedStatement pstmt = null;
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, 1);
+			pstmt.setInt(2, roomId);
+			pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
 }	

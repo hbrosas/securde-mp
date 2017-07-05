@@ -52,21 +52,31 @@ public class CatalogManager {
 		
 	}
 	
-	public static ArrayList<Integer> GetAllCatalogs() {
-		String sql = "SELECT " + "*" + " FROM " + Catalog.TABLE_NAME
-				 + ";";
+	public static ArrayList<Catalog> GetAllCatalogs() {
+		String sql = "SELECT " + "*" + " FROM " + Catalog.TABLE_NAME + ";";
 		
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		ArrayList<Integer> catalogIds = new ArrayList<>();
+		ArrayList<Catalog> allCatalog = new ArrayList<Catalog>();
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			
 			while(rs.next()) {
-				 catalogIds.add(rs.getInt(Catalog.COLUMN_CATALOGID));
+				Catalog catalog = new Catalog();
+				catalog.setCatalogId(rs.getInt(Catalog.COLUMN_CATALOGID));
+				catalog.setTypeId(rs.getInt(Catalog.COLUMN_TYPEID));
+				catalog.setStatusId(rs.getInt(Catalog.COLUMN_STATUSID));
+				catalog.setCurrentBorrowId(rs.getInt(Catalog.COLUMN_CURRENTBORROWID));
+				catalog.setTitle(rs.getString(Catalog.COLUMN_TITLE));
+				catalog.setAuthor(rs.getString(Catalog.COLUMN_AUTHOR));
+				catalog.setPublisher(rs.getString(Catalog.COLUMN_PUBLISHER));
+				catalog.setYear(rs.getString(Catalog.COLUMN_YEAR));
+				catalog.setTags(rs.getString(Catalog.COLUMN_TAGS));
+				catalog.setLocation(rs.getString(Catalog.COLUMN_LOCATION));
+				allCatalog.add(catalog);
 			}
 			
 		} catch (SQLException e) {
@@ -83,7 +93,7 @@ public class CatalogManager {
 			}
 		}
 		
-		return catalogIds;
+		return allCatalog;
 	}
 	
 	public static boolean DeleteCatalog(int catalogid) {

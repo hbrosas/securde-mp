@@ -26,6 +26,10 @@ public class UserAccount implements Serializable {
 		SQAnswer = sQAnswer;
 	}
 	
+	public UserAccount() {
+		// TODO Auto-generated constructor stub
+	}
+
 	private int userId, accountId, roleId, SQId;
 	private String username, password, emailAddress, SQAnswer;
 	

@@ -93,15 +93,12 @@ public class AccountManager {
 	}
 	
 	public static int LoginAccount(String value, String password) {
-		String sql = "SELECT " + " * " + " FROM " + UserAccount.TABLE_NAME + " WHERE " + UserAccount.COLUMN_USERNAME + " LIKE "
-				+ "?" + " OR " + UserAccount.COLUMN_EMAILADDRESS + " LIKE " + "?" + " AND " + UserAccount.COLUMN_PASSWORD
-				 + "?" + ";";
+		String sql = "SELECT * FROM " + UserAccount.TABLE_NAME + " WHERE " + UserAccount.COLUMN_USERNAME + " LIKE ? OR " + UserAccount.COLUMN_EMAILADDRESS + " LIKE ? AND " + UserAccount.COLUMN_PASSWORD + " LIKE ?;";
 		
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		int Accountid = 0;
-		
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -111,7 +108,7 @@ public class AccountManager {
 			pstmt.setString(3, password);
 			rs = pstmt.executeQuery();
 			if(rs.next()) {
-				Accountid = rs.getInt(0);
+				Accountid = rs.getInt(UserAccount.COLUMN_ACCOUNTID);
 			}
 			
 		} catch (SQLException e) {
@@ -211,26 +208,26 @@ public class AccountManager {
 		return Accountid;
 	}
 	
-	public static int GetAccountDetails(String value, String password) {
-		String sql = "SELECT " + " * " + " FROM " + UserAccount.TABLE_NAME + " WHERE " + UserAccount.COLUMN_USERNAME + " LIKE "
-				+ "?" + " OR " + UserAccount.COLUMN_EMAILADDRESS + " LIKE " + "?" + " AND " + UserAccount.COLUMN_PASSWORD
-				 + "?" + ";";
+	public static UserAccount GetAccountDetails(int userid) {
+		String sql = "SELECT * FROM " + UserAccount.TABLE_NAME + " WHERE " + UserAccount.COLUMN_ACCOUNTID + " LIKE ?;";
 		
 		Connection conn = DBPool.getInstance().getConnection();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		int Accountid = 0;
-		
+		UserAccount account = new UserAccount();
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, value);
-			pstmt.setString(2, value);
-			pstmt.setString(3, password);
+			pstmt.setInt(1, userid);
 			rs = pstmt.executeQuery();
 
 			if(rs.next()) {
-				Accountid = rs.getInt(UserAccount.COLUMN_ACCOUNTID);
+				account.setAccountId(rs.getInt(UserAccount.COLUMN_ACCOUNTID));
+				account.setEmailAddress(rs.getString(UserAccount.COLUMN_EMAILADDRESS));
+				account.setPassword(rs.getString(UserAccount.COLUMN_PASSWORD));
+				account.setRoleId(rs.getInt(UserAccount.COLUMN_ROLEID));
+				account.setUserId(rs.getInt(UserAccount.COLUMN_USERID));
+				account.setUsername(rs.getString(UserAccount.COLUMN_USERNAME));
 			}
 			
 		} catch (SQLException e) {
@@ -247,9 +244,7 @@ public class AccountManager {
 			}
 		}
 		
-		return Accountid;
-		
-		
+		return account;
 	}
 	
 	
