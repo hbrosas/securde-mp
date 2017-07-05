@@ -8,7 +8,18 @@ public class ReserveHistory implements Serializable {
 	public static final String COLUMN_ROOMID = "roomId";
 	public static final String COLUMN_ACCOUNTID = "accountId";
 	public static final String COLUMN_DATERESERVED = "dateReserved";
-
+	
+	public ReserveHistory() {
+		
+	}
+	
+	public ReserveHistory(int reserveId, int roomId, int accountId, String dateReserved) {
+		super();
+		this.reserveId = reserveId;
+		this.roomId = roomId;
+		this.accountId = accountId;
+		this.dateReserved = dateReserved;
+	}
 	private int reserveId, roomId, accountId;
 	private String dateReserved;
 	
