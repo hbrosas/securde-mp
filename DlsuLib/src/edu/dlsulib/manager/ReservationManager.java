@@ -141,10 +141,12 @@ public class ReservationManager {
 			pstmt.setString(3, rsvhistory.getDateReserved());
 			rs = pstmt.executeQuery();
 			
+			while(rs.next()) {
 			reservehistory.add(new ReserveHistory(rs.getInt(ReserveHistory.COLUMN_RESERVEID),
 												  rs.getInt(ReserveHistory.COLUMN_ROOMID),
 												  rs.getInt(ReserveHistory.COLUMN_ACCOUNTID),
 												  rs.getString(ReserveHistory.COLUMN_DATERESERVED)));
+			}
 			
 			return reservehistory;
 		} catch (SQLException e) {

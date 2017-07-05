@@ -33,6 +33,7 @@ public class AccountManager {
 						 					rs.getString(UserAccount.COLUMN_EMAILADDRESS),
 						 					rs.getString(UserAccount.COLUMN_SQANSWER)));
 			}
+			return account;
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -48,7 +49,7 @@ public class AccountManager {
 			}
 		}
 		
-		return account;
+		return null;
 	}	
 	
 	public static int CreateAccount(int userid, int accountid, int roleid, String username, String password, String email, int sqid, String sqans) {

@@ -15,8 +15,11 @@ public class Catalog implements Serializable {
 	public static final String COLUMN_YEAR = "year";
 	public static final String COLUMN_TAGS = "tags";
 	
+
 	private int catalogId, statusId, typeId, currentBorrowId;
 	private String location, title,  author, publisher, year, tags;
+	
+	
 	
 	public String getTitle() {
 		return title;
