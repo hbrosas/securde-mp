@@ -24,6 +24,9 @@
 
     <!-- Dashboard Style -->
     <link rel="stylesheet" href="css/dashboard.css">
+
+    <!-- Date-Time Picker -->
+  	<link rel="stylesheet" href="vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
 </head>
 
 <body class="nav-md">
@@ -59,8 +62,7 @@
                                 <li><a href="libstaff_home.html"><i class="fa fa-home"></i> Home</a></li>
                                 <li><a><i class="fa fa-book"></i> Books <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a data-toggle="modal" data-target="#addBook">Add Book</a></li>
-                                        <li><a href="edit_books.html">Edit/Delete Book</a></li>
+                                        <li><a data-toggle="modal" data-target="#addBook">View Catalog</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-lightbulb-o"></i>Rooms <span class="fa fa-chevron-down"></span></a>
@@ -121,104 +123,45 @@
 
             <!-- page content -->
             <div class="right_col" role="main">
-              <div class="panel panel-default">
-          			<div class="panel-heading" style="font-size:2em;">Room Reservation</div>
-          			<div class="panel-body">
-          				<div class="row">
-
-          					<div class="col-md-4">
-          						<label for="accountRole"	><h4>Select Room</h4></label>
-          						<select class="form-control" id="accountRole">
-          							<option value="1">Michaelangelo</option>
-          							<option value="2">Leonardo</option>
-          							<option value="3">Donatello</option>
-          							<option value="4">Raphael</option>
-          						</select>
-                      <br>
-                      <div class="form-group">
-          							<div class='input-group date' id='datetimepicker1'>
-          								<input type='text' class="form-control" />
-          								<span class="input-group-addon">
-                                  <span class="glyphicon glyphicon-calendar"></span>
-          								</span>
-          							</div>
-          						</div>
-          						<img src="images/room.jpg" alt="" class="img-thumbnail">
-          					</div>
-          					<div class="col-md-8">
-          							<h4>Select Time Slots</h4>
-          							<div class="wrapper">
-          								<table class="table table-timeslot">
-          									<thead>
-          										<tr>
-          											<th>7:00-7:30</th>
-          											<th>7:30-8:00</th>
-          											<th>8:00-8:30</th>
-          											<th>8:30-9:00</th>
-          											<th>9:00-9:30</th>
-          											<th>9:30-10:00</th>
-          											<th>10:00-10:30</th>
-          											<th>10:30-11:00</th>
-          											<th>11:00-11:30</th>
-          											<th>11:30-12:00</th>
-          											<th>12:00-12:30</th>
-          											<th>12:30-13:00</th>
-          											<th>13:00-13:30</th>
-          											<th>13:30-14:00</th>
-          											<th>14:00-14:30</th>
-          											<th>14:30-15:00</th>
-          											<th>15:00-15:30</th>
-          											<th>15:30-16:00</th>
-          											<th>16:00-16:30</th>
-          											<th>16:30-17:00</th>
-          											<th>17:00-17:30</th>
-          											<th>17:30-18:00</th>
-          											<th>18:00-18:30</th>
-          											<th>18:30-19:00</th>
-          											<th>19:00-19:30</th>
-          											<th>19:30-20:00</th>
-          										</tr>
-          										<tr>
-          											<td><input id="700-730" type="checkbox" checked></td>
-          											<td><input id="700-730" type="checkbox" checked></td>
-          											<td><input id="700-730" type="checkbox" checked></td>
-          											<td><input id="700-730" type="checkbox"></td>
-          											<td><input id="700-730" type="checkbox"></td>
-          											<td><input id="700-730" type="checkbox"></td>
-          											<td><input id="700-730" type="checkbox"></td>
-          											<td><input id="700-730" type="checkbox"></td>
-          											<td><input id="700-730" type="checkbox"></td>
-          											<td><input id="700-730" type="checkbox"></td>
-          											<td><input id="700-730" type="checkbox"></td>
-          											<td><input id="700-730" type="checkbox"></td>
-          											<td><input id="700-730" type="checkbox"></td>
-          											<td><input id="700-730" type="checkbox"></td>
-          											<td><input id="700-730" type="checkbox"></td>
-          											<td><input id="700-730" type="checkbox"></td>
-          											<td><input id="700-730" type="checkbox"></td>
-          											<td><input id="700-730" type="checkbox"></td>
-          											<td><input id="700-730" type="checkbox"></td>
-          											<td><input id="700-730" type="checkbox"></td>
-          											<td><input id="700-730" type="checkbox"></td>
-          											<td><input id="700-730" type="checkbox"></td>
-          											<td><input id="700-730" type="checkbox"></td>
-          											<td><input id="700-730" type="checkbox"></td>
-          											<td><input id="700-730" type="checkbox"></td>
-          											<td><input id="700-730" type="checkbox"></td>
-          										</tr>
-          									</thead>
-          								</table>
-          							</div>
-          							<br><br><br><br>
-          							<button type="submit" href="" class="btn btn btn-primary btn-block register-input" style="background-color: #1b5e20; border-color: #1b5e20;">Apply Changes</button>
-          					</div>
-          				</div>
-
-
-
-          			</div>
-          			<!-- end of panel body -->
-          		</div>
+                <h1>Welcome Back, Gandalf</h1>
+                <br><br><br><br>
+                <div class="row">
+                    <a href="admin_catalog.html">
+                        <div class="col-xs-12 col-md-2 col-md-offset-2 ">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="fa fa-book" style="font-size: 10em;"></div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <h2>&nbsp;&nbsp;View Library Catalog</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="admin_rooms.html">
+                        <div class="col-xs-12 col-md-2 col-md-offset-1 ">
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="fa fa-book" style="font-size: 10em;"></div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <h2>View all rooms</h2>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="edit_reservation.html">
+                            <div class="col-xs-12 col-md-2 col-md-offset-1 ">
+                                <div class="row">
+                                    <div class="col-xs-12">
+                                        <div class="fa fa-lightbulb-o" style="font-size: 10em;"></div>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <h2>Edit Room<br>Reservation</h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                </div>
             </div>
             <!-- /page content -->
 
@@ -307,16 +250,9 @@
     <script src="js/gentelella.min.js"></script>
 
     <!-- Dashboard Script -->
-    <script type="text/javascript" src="js/dashboard.js"></script>
-    <!-- Date-Time Picker -->
-  	<script type="text/javascript" src="vendors/moment/min/moment.min.js"></script>
-  	<script type="text/javascript" src="vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+    <script type="text/javascript" src="js/dashboard.js">
 
-    <script type="text/javascript">
-  		$("#datetimepicker1").datetimepicker({
-  			format: 'YYYY-MM-DD'
-  		});
-  	</script>
+    </script>
 </body>
 
 </html>

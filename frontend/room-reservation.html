@@ -15,6 +15,9 @@
 	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<link rel="stylesheet" href="  css/borrow-history-style.css">
 	<link rel="stylesheet" href="css/room-reservation.css">
+
+	<!-- Date-Time Picker -->
+	<link rel="stylesheet" href="vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css">
 </head>
 
 <body>
@@ -88,81 +91,90 @@
 			<div class="panel-body">
 				<div class="row">
 					<div class="col-md-4">
-						<label for="accountRole"	><h4>Select Room</h4></label>
+						<label for="accountRole"><h4>Select Room</h4></label>
 						<select class="form-control" id="accountRole">
 							<option value="1">Michaelangelo</option>
 							<option value="2">Leonardo</option>
 							<option value="3">Donatello</option>
 							<option value="4">Raphael</option>
 						</select>
+						<br>
+						<div class="form-group">
+							<div class='input-group date' id='datetimepicker1'>
+								<input type='text' class="form-control" />
+								<span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+								</span>
+							</div>
+						</div>
 						<img src="images/room.jpg" alt="" class="img-thumbnail">
 					</div>
 					<div class="col-md-8">
-							<h4>Select Time Slots</h4>
-							<div class="wrapper">
-								<table class="table table-timeslot">
-									<thead>
-										<tr>
-											<th>7:00-7:30</th>
-											<th>7:30-8:00</th>
-											<th>8:00-8:30</th>
-											<th>8:30-9:00</th>
-											<th>9:00-9:30</th>
-											<th>9:30-10:00</th>
-											<th>10:00-10:30</th>
-											<th>10:30-11:00</th>
-											<th>11:00-11:30</th>
-											<th>11:30-12:00</th>
-											<th>12:00-12:30</th>
-											<th>12:30-13:00</th>
-											<th>13:00-13:30</th>
-											<th>13:30-14:00</th>
-											<th>14:00-14:30</th>
-											<th>14:30-15:00</th>
-											<th>15:00-15:30</th>
-											<th>15:30-16:00</th>
-											<th>16:00-16:30</th>
-											<th>16:30-17:00</th>
-											<th>17:00-17:30</th>
-											<th>17:30-18:00</th>
-											<th>18:00-18:30</th>
-											<th>18:30-19:00</th>
-											<th>19:00-19:30</th>
-											<th>19:30-20:00</th>
-										</tr>
-										<tr>
-											<td><input id="700-730" type="checkbox"></td>
-											<td><input id="700-730" type="checkbox"></td>
-											<td><input id="700-730" type="checkbox"></td>
-											<td><input id="700-730" type="checkbox"></td>
-											<td><input id="700-730" type="checkbox"></td>
-											<td><input id="700-730" type="checkbox"></td>
-											<td><input id="700-730" type="checkbox"></td>
-											<td><input id="700-730" type="checkbox"></td>
-											<td><input id="700-730" type="checkbox"></td>
-											<td><input id="700-730" type="checkbox"></td>
-											<td><input id="700-730" type="checkbox"></td>
-											<td><input id="700-730" type="checkbox"></td>
-											<td><input id="700-730" type="checkbox"></td>
-											<td><input id="700-730" type="checkbox"></td>
-											<td><input id="700-730" type="checkbox"></td>
-											<td><input id="700-730" type="checkbox"></td>
-											<td><input id="700-730" type="checkbox"></td>
-											<td><input id="700-730" type="checkbox"></td>
-											<td><input id="700-730" type="checkbox"></td>
-											<td><input id="700-730" type="checkbox"></td>
-											<td><input id="700-730" type="checkbox"></td>
-											<td><input id="700-730" type="checkbox"></td>
-											<td><input id="700-730" type="checkbox"></td>
-											<td><input id="700-730" type="checkbox"></td>
-											<td><input id="700-730" type="checkbox"></td>
-											<td><input id="700-730" type="checkbox"></td>
-										</tr>
-									</thead>
-								</table>
-							</div>
-							<br><br><br><br>
-							<button type="submit" href="" class="btn btn btn-primary btn-block register-input" style="background-color: #1b5e20; border-color: #1b5e20;">Reserve</button>
+						<h4>Select Time Slots</h4>
+						<div class="wrapper">
+							<table class="table table-timeslot">
+								<thead>
+									<tr>
+										<th>7:00-7:30</th>
+										<th>7:30-8:00</th>
+										<th>8:00-8:30</th>
+										<th>8:30-9:00</th>
+										<th>9:00-9:30</th>
+										<th>9:30-10:00</th>
+										<th>10:00-10:30</th>
+										<th>10:30-11:00</th>
+										<th>11:00-11:30</th>
+										<th>11:30-12:00</th>
+										<th>12:00-12:30</th>
+										<th>12:30-13:00</th>
+										<th>13:00-13:30</th>
+										<th>13:30-14:00</th>
+										<th>14:00-14:30</th>
+										<th>14:30-15:00</th>
+										<th>15:00-15:30</th>
+										<th>15:30-16:00</th>
+										<th>16:00-16:30</th>
+										<th>16:30-17:00</th>
+										<th>17:00-17:30</th>
+										<th>17:30-18:00</th>
+										<th>18:00-18:30</th>
+										<th>18:30-19:00</th>
+										<th>19:00-19:30</th>
+										<th>19:30-20:00</th>
+									</tr>
+									<tr>
+										<td><input id="700-730" type="checkbox"></td>
+										<td><input id="700-730" type="checkbox"></td>
+										<td><input id="700-730" type="checkbox"></td>
+										<td><input id="700-730" type="checkbox"></td>
+										<td><input id="700-730" type="checkbox"></td>
+										<td><input id="700-730" type="checkbox"></td>
+										<td><input id="700-730" type="checkbox"></td>
+										<td><input id="700-730" type="checkbox"></td>
+										<td><input id="700-730" type="checkbox"></td>
+										<td><input id="700-730" type="checkbox"></td>
+										<td><input id="700-730" type="checkbox"></td>
+										<td><input id="700-730" type="checkbox"></td>
+										<td><input id="700-730" type="checkbox"></td>
+										<td><input id="700-730" type="checkbox"></td>
+										<td><input id="700-730" type="checkbox"></td>
+										<td><input id="700-730" type="checkbox"></td>
+										<td><input id="700-730" type="checkbox"></td>
+										<td><input id="700-730" type="checkbox"></td>
+										<td><input id="700-730" type="checkbox"></td>
+										<td><input id="700-730" type="checkbox"></td>
+										<td><input id="700-730" type="checkbox"></td>
+										<td><input id="700-730" type="checkbox"></td>
+										<td><input id="700-730" type="checkbox"></td>
+										<td><input id="700-730" type="checkbox"></td>
+										<td><input id="700-730" type="checkbox"></td>
+										<td><input id="700-730" type="checkbox"></td>
+									</tr>
+								</thead>
+							</table>
+						</div>
+						<br><br><br><br>
+						<button type="submit" href="" class="btn btn btn-primary btn-block register-input" style="background-color: #1b5e20; border-color: #1b5e20;">Reserve</button>
 					</div>
 				</div>
 
@@ -178,10 +190,14 @@
 	<script type="text/javascript" src="js/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/navbar.js"></script>
-	<script>
-
+	<!-- Date-Time Picker -->
+	<script type="text/javascript" src="vendors/moment/min/moment.min.js"></script>
+	<script type="text/javascript" src="vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript">
+		$("#datetimepicker1").datetimepicker({
+			format: 'YYYY-MM-DD'
+		});
 	</script>
-
 
 
 </body>
