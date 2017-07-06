@@ -24,8 +24,6 @@
 
     <!-- Dashboard Style -->
     <link rel="stylesheet" href="css/dashboard.css">
-
-    <link rel="stylesheet" href="css/jquery.dataTables.min.css">
 </head>
 
 <body class="nav-md">
@@ -123,103 +121,48 @@
 
             <!-- page content -->
             <div class="right_col" role="main">
-              <div class="panel panel-default">
-          			<div class="panel-heading" style="font-size:2em;">Room Reservation</div>
-          			<div class="panel-body">
-          				<div class="row">
+              <table id="viewTable" class="display" cellspacing="0" width="100%">
+                <thead>
+                  <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>Availability</th>
+                    <th> </th>
+                  </tr>
+                </thead>
 
-          					<div class="col-md-4">
-          						<label for="accountRole"	><h4>Select Room</h4></label>
-          						<select class="form-control" id="accountRole">
-          							<option value="1">Michaelangelo</option>
-          							<option value="2">Leonardo</option>
-          							<option value="3">Donatello</option>
-          							<option value="4">Raphael</option>
-          						</select>
-                      <br>
-                      <div class="form-group">
-          							<div class='input-group date' id='datetimepicker1'>
-          								<input type='text' class="form-control" />
-          								<span class="input-group-addon">
-                                  <span class="glyphicon glyphicon-calendar"></span>
-          								</span>
-          							</div>
-          						</div>
-          						<img src="images/room.jpg" alt="" class="img-thumbnail">
-          					</div>
-          					<div class="col-md-8">
-          							<h4>Select Time Slots</h4>
-          							<div class="wrapper">
-          								<table class="table table-timeslot">
-          									<thead>
-          										<tr>
-          											<th>7:00-7:30</th>
-          											<th>7:30-8:00</th>
-          											<th>8:00-8:30</th>
-          											<th>8:30-9:00</th>
-          											<th>9:00-9:30</th>
-          											<th>9:30-10:00</th>
-          											<th>10:00-10:30</th>
-          											<th>10:30-11:00</th>
-          											<th>11:00-11:30</th>
-          											<th>11:30-12:00</th>
-          											<th>12:00-12:30</th>
-          											<th>12:30-13:00</th>
-          											<th>13:00-13:30</th>
-          											<th>13:30-14:00</th>
-          											<th>14:00-14:30</th>
-          											<th>14:30-15:00</th>
-          											<th>15:00-15:30</th>
-          											<th>15:30-16:00</th>
-          											<th>16:00-16:30</th>
-          											<th>16:30-17:00</th>
-          											<th>17:00-17:30</th>
-          											<th>17:30-18:00</th>
-          											<th>18:00-18:30</th>
-          											<th>18:30-19:00</th>
-          											<th>19:00-19:30</th>
-          											<th>19:30-20:00</th>
-          										</tr>
-          										<tr>
-          											<td><input id="700-730" type="checkbox" checked disabled></td>
-          											<td><input id="700-730" type="checkbox" checked disabled></td>
-          											<td><input id="700-730" type="checkbox" checked disabled></td>
-          											<td><input id="700-730" type="checkbox" disabled></td>
-          											<td><input id="700-730" type="checkbox" disabled></td>
-          											<td><input id="700-730" type="checkbox" disabled></td>
-          											<td><input id="700-730" type="checkbox" disabled></td>
-          											<td><input id="700-730" type="checkbox" disabled></td>
-          											<td><input id="700-730" type="checkbox" disabled></td>
-          											<td><input id="700-730" type="checkbox" disabled></td>
-          											<td><input id="700-730" type="checkbox" disabled></td>
-          											<td><input id="700-730" type="checkbox" disabled></td>
-          											<td><input id="700-730" type="checkbox" disabled></td>
-          											<td><input id="700-730" type="checkbox" disabled></td>
-          											<td><input id="700-730" type="checkbox" disabled></td>
-          											<td><input id="700-730" type="checkbox" disabled></td>
-          											<td><input id="700-730" type="checkbox" disabled></td>
-          											<td><input id="700-730" type="checkbox" disabled></td>
-          											<td><input id="700-730" type="checkbox" disabled></td>
-          											<td><input id="700-730" type="checkbox" disabled></td>
-          											<td><input id="700-730" type="checkbox" disabled></td>
-          											<td><input id="700-730" type="checkbox" disabled></td>
-          											<td><input id="700-730" type="checkbox" disabled></td>
-          											<td><input id="700-730" type="checkbox" disabled></td>
-          											<td><input id="700-730" type="checkbox" disabled></td>
-          											<td><input id="700-730" type="checkbox" disabled></td>
-          										</tr>
-          									</thead>
-          								</table>
-          							</div>
-          							<br><br><br><br>
-          					</div>
-          				</div>
-
-
-
-          			</div>
-          			<!-- end of panel body -->
-          		</div>
+                <tbody>
+                  <tr>
+                    <td>Singing in the rain</td>
+                    <td>Rihanna</td>
+                    <td>Magazine</td>
+                    <td><span class="label label-primary">Available</span></td>
+                    <td><button class="btn btn-block" data-toggle="modal" data-target="#bookModal">View Details</button></td>
+                  </tr>
+                  <tr>
+                    <td>How to be badass</td>
+                    <td>John Wick</td>
+                    <td>Book</td>
+                    <td><span class="label label-primary">Available</span></td>
+                    <td><button class="btn btn-block" data-toggle="modal" data-target="#bookModal">View Details</button></td>
+                  </tr>
+                  <tr>
+                    <td>Magic 101</td>
+                    <td>Gandalf the grey</td>
+                    <td>Thesis</td>
+                    <td><span class="label label-primary">Available</span></td>
+                    <td><button class="btn btn-block" data-toggle="modal" data-target="#bookModal">View Details</button></td>
+                  </tr>
+                  <tr>
+                    <td>Cussing and cooking</td>
+                    <td>Gordon Ramsay</td>
+                    <td>Book</td>
+                    <td><span class="label label-primary">Available</span></td>
+                    <td><button class="btn btn-block" data-toggle="modal" data-target="#bookModal">View Details</button></td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
             <!-- /page content -->
 
@@ -244,10 +187,14 @@
     <!-- iCheck -->
     <script src="vendors/iCheck/icheck.min.js"></script>
     <!-- Swal -->
-    <script type="text/javascript" src="js/sweetalert.min.js"></script>
+    <script type="text/javascript" src="js/sweetalert.min.js">
+
+    </script>
 
     <!-- Custom Theme Scripts -->
     <script src="js/gentelella.min.js"></script>
+    <!-- JQuery Data Tables -->
+    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
 
     <!-- Dashboard Script -->
     <script type="text/javascript" src="js/dashboard.js"></script>

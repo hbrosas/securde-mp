@@ -1,10 +1,9 @@
 $(document).ready(function() {
-    $('#booksTable').on('load',function(){
-      $('#booksTable').DataTable();
-    });
-    $('#availabilityTable').on('load',function(){
-      $('#availabilityTable').DataTable();
-    });
+
+    $('#booksTable').DataTable();
+    $('#viewTable').DataTable();
+    $('#availabilityTable').DataTable();
+  
 
 } );
 $('#addButton').click(function(){
@@ -24,4 +23,7 @@ $('#deleteBook').click(function(){
 function(){
   swal("Deleted", "Magic 101 has been deleted.", "success");
 });
+})
+$('#upload').click(function(){
+   $('#file-input').trigger('click');
 })

@@ -133,7 +133,7 @@
                                     <div class="fa fa-book" style="font-size: 10em;"></div>
                                 </div>
                                 <div class="col-xs-12">
-                                    <h2>&nbsp;&nbsp;View Library Catalog</h2>
+                                    <h2>View Library Catalog</h2>
                                 </div>
                             </div>
                         </div>
@@ -149,15 +149,16 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="edit_reservation.html">
+                        <a id="upload">
                             <div class="col-xs-12 col-md-2 col-md-offset-1 ">
                                 <div class="row">
                                     <div class="col-xs-12">
-                                        <div class="fa fa-lightbulb-o" style="font-size: 10em;"></div>
+                                        <div class="fa fa-file-excel-o" style="font-size: 10em;"></div>
                                     </div>
                                     <div class="col-xs-12">
-                                        <h2>Edit Room<br>Reservation</h2>
+                                        <h2>Export XML<br>/Excel</h2>
                                     </div>
+                                    <input id="file-input" type="file" name="name" style="display: none;" />
                                 </div>
                             </div>
                         </a>
@@ -250,9 +251,7 @@
     <script src="js/gentelella.min.js"></script>
 
     <!-- Dashboard Script -->
-    <script type="text/javascript" src="js/dashboard.js">
-
-    </script>
+    <script type="text/javascript" src="js/dashboard.js"></script>
 </body>
 
 </html>
