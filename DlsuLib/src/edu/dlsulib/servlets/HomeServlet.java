@@ -40,15 +40,14 @@ public class HomeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub		
-		ArrayList<Catalog> allCatalog = CatalogManager.GetAllCatalogs();
+		ArrayList<Catalog> allCatalog = CatalogsManager.GetAllCatalogs();
 		request.setAttribute("allCatalog", allCatalog);
 		
-		int accountId = Integer.parseInt(request.getSession().getAttribute("userid").toString());
+		int accountId = Integer.parseInt(request.getSession().getAttribute("imsuchacutie0029").toString());
 		UserAccount account = AccountManager.GetAccountDetails(accountId);
 		UserProfile profile = ProfileManager.GetProfile(account.getUserId());
 		request.setAttribute("account", account);
 		request.setAttribute("profile", profile);
-		
 		// Get Role
 		switch(account.getRoleId()) {
 		case 1: // student

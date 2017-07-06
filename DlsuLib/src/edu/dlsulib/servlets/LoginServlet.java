@@ -50,7 +50,6 @@ public class LoginServlet extends HttpServlet {
 	        response.getWriter().write("error");
 		} else {			
 			System.out.println("Login Successful");
-			request.setAttribute("userID", accountId);
 			
 			String userid = accountId+"";
 			
@@ -61,7 +60,7 @@ public class LoginServlet extends HttpServlet {
 			
 			// SESSIONS
 			HttpSession session = request.getSession();
-			session.setAttribute("userid", userid);
+			session.setAttribute("imsuchacutie0029", userid);
 			request.getRequestDispatcher("HomeServlet").forward(request, response);
 		}
 	}

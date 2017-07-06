@@ -42,41 +42,57 @@
 
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#" id="enable-search"><span class="glyphicon glyphicon-search"></span> Search</a></li>
-					<li><button id="btncart"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</button></li>
+					<li><a onclick="goToCart()"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
 					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">${profile.lastname}, ${profile.firstname}&nbsp;<span class="caret"></span></a>
-						<ul class="dropdown-menu">
-							<li><a href="borrow_history.html">Borrow History</a></li>
-							<li><a href="#">Reservation History</a></li>
-							<li role="separator" class="divider"></li>
-							<li><a href="edit_profile.html">Edit Profile</a></li>
-							<li><a href="#">Logout</a></li>
-						</ul>
+						<c:if test="${account.roleId != 6}">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							${profile.lastname}, ${profile.firstname}&nbsp;<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li><a href="borrow_history.html">Borrow History</a></li>
+								<li><a href="#">Reservation History</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="edit_profile.html">Edit Profile</a></li>
+								<li><a href="#">Logout</a></li>
+							</ul>
+						</c:if>
+						<c:if test="${account.roleId == 6}">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+							Guest &nbsp;<span class="caret"></span></a>
+							<ul class="dropdown-menu">
+								<li role="separator" class="divider"></li>
+								<li><a href="#">Login</a></li>
+							</ul>
+						</c:if>
 					</li>
 				</ul>
-
-
 			</div>
 			<!-- /.navbar-collapse -->
 			<ul class="nav navbar-nav" id="search-navbar">
 				<li>
-					<form class="navbar-form navbar-left" role="search">
+					<form class="navbar-form navbar-left" role="search" action="SearchServlet" method="GET">
 						<div class="form-group">
-							<select class="form-control">
+							<select class="form-control" name="by">
 										<option value="Title">Title</option>
 					 					<option value="Location">Location</option>
 					 					<option value="Author">Author</option>
 					 					<option value="Publisher">Publisher</option>
 					 					<option value="Tags">Tags</option>
 					 				</select>
-							<input type="text" class="form-control" placeholder="Keyword" style="width: 800px;">
-							<select class="form-control">
-					 					<option value="Books">Books</option>
-					 					<option value="Magazines">Magazines</option>
-					 					<option value="Thesis">Thesis</option>
+							<input type="text" class="form-control" placeholder="Keyword" name="keyword" style="width: 800px;">
+							<select class="form-control" name="type">
+					 					<option value="1">Books</option>
+					 					<option value="2">Magazines</option>
+					 					<option value="3">Thesis</option>
 					 				</select>
 						</div>
 						<button type="submit" class="btn btn-default" style="width: 100px;">Submit</button>
+						<c:if test="${account.roleId != 6}">
+							<input type="hidden" name="imsuchacutie0029" value="${account.accountId})">
+						</c:if>
+						<c:if test="${account.roleId == 6}">
+							<input type="hidden" name="imsuchacutie0029" value="-1">
+						</c:if>
+						
 					</form>
 				</li>
 			</ul>
@@ -247,9 +263,9 @@
 			swal(title, "has been added to your cart", "success");
 		});
 		
-		$(document).on("click", "#btncart", function(){
+		function goToCart() {
 			$("#reserveForm").submit();
-		});
+		}
 	</script>
 </body>
 

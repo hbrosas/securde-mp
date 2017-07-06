@@ -79,17 +79,18 @@
 					<div class="form-group">
 						<label for="inputSearchBy" style="font-family: 'Open Sans'; font-weight: 100;">Search By</label>
 						<select class="form-control" id="inputSearchBy">
-								<option>Location</option>
-								<option>Author</option>
-								<option>Publisher</option>
-								<option>Tags</option>
+								<option value = "Title">Title</option>
+								<option value = "Location">Location</option>
+								<option value = "Author">Author</option>
+								<option value = "Publisher">Publisher</option>
+								<option value = "Tags">Tags</option>
 							</select>
 					</div>
 					<div class="form-group">
 						<input type="text" class="form-control" id="inputKeyword">
 					</div>
 
-					<a href="list_catalog.html" class="btn btn btn-primary btn-block" style="background-color: #1b5e20; border-color: #1b5e20;"> Search</a>
+					<button id="searchbtn" class="btn btn btn-primary btn-block" style="background-color: #1b5e20; border-color: #1b5e20;"> Search</button>
 					<div class="login-or">
 						<span class="span-or">or</span>
 					</div>
@@ -103,6 +104,11 @@
 			<input type="hidden" id="justsomeshiz">
 		</form>
 
+		<form action="SearchServlet" method="GET" id="searchform">
+			<input type="hidden" id="justsomeshiz" name="userid" value = "6">
+			<input type="hidden" id="by" name="by">
+			<input type="hidden" id="keyword" name="keyword">
+		</form>
 	</div>
 	<!-- body -->
 
@@ -158,6 +164,16 @@
 						}
 					}
 				});
+			});
+			
+			$("#searchbtn").on("click", function() {
+				var by = $("#inputSearchBy").val();
+				var keyword = $("#inputKeyword").val();
+				if(by != "" && keyword != "") {
+					$("#by").val(by);
+					$("#keyword").val(keyword);
+					$("#searchform").submit();
+				}
 			});
 		});
 	</script>
