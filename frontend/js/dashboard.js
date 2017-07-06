@@ -1,5 +1,11 @@
 $(document).ready(function() {
-    $('#booksTable').DataTable();
+    $('#booksTable').on('load',function(){
+      $('#booksTable').DataTable();
+    });
+    $('#availabilityTable').on('load',function(){
+      $('#availabilityTable').DataTable();
+    });
+
 } );
 $('#addButton').click(function(){
   swal("Book Title", "has been added to the catalog.", "success")

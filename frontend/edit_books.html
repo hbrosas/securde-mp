@@ -61,13 +61,13 @@
                                 <li><a href="libstaff_home.html"><i class="fa fa-home"></i> Home</a></li>
                                 <li><a><i class="fa fa-book"></i> Books <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="form.html">Add Book</a></li>
-                                        <li><a href="form_advanced.html">Edit/Delete Book</a></li>
+                                        <li><a data-toggle="modal" data-target="#addBook">Add Book</a></li>
+                                        <li><a href="edit_books.html">Edit/Delete Book</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-lightbulb-o"></i>Rooms <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="general_elements.html">Change Room Availability</a></li>
+                                        <li><a href="availability_of_rooms.html">Change Room Availability</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -123,31 +123,32 @@
 
             <!-- page content -->
             <div class="right_col" role="main">
-              <div class="main-container container">
-                <table id="booksTable" class="display" cellspacing="0" width="100%">
-                  <thead>
-                    <tr>
-                      <th>Title</th>
-                      <th>Author</th>
-                      <th>Category</th>
-                      <th>Availability</th>
-                      <th> </th>
-                      <th></th>
-                    </tr>
-                  </thead>
+                <div class="main-container container">
+                    <table id="booksTable" class="display" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Category</th>
+                                <th>Availability</th>
+                                <th> </th>
+                                <th> </th>
+                            </tr>
+                        </thead>
 
-                  <tbody>
-                    <tr>
-                      <td>Singing in the rain</td>
-                      <td>Rihanna</td>
-                      <td>Magazine</td>
-                      <td><span class="label label-primary">Available</span></td>
-                      <td><button class="btn btn-block" data-toggle="modal" data-target="#editBook">Edit Details</button></td>
-                      <td><button class="btn btn-block btn-danger" id="deleteBook">Delete Book</button></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+                        <tbody>
+                            <tr>
+                                <td>Singing in the rain</td>
+                                <td>Rihanna</td>
+                                <td>Magazine</td>
+                                <td><span class="label label-primary">Available</span></td>
+                                <td><button class="btn btn-block" data-toggle="modal" data-target="#editBook">Edit Details</button></td>
+                                <td><button class="btn btn-block btn-danger" id="deleteBook">Delete Book</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
             <!-- /page content -->
 
@@ -220,6 +221,64 @@
         </div>
     </div>
 
+    <!-- Modal -->
+    <div id="addBook" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Add a New Book</h4>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="title">Book title:</label>
+                            <input type="text" class="form-control" id="title">
+                        </div>
+                        <div class="form-group">
+                            <label for="author">Book Author:</label>
+                            <input type="text" class="form-control" id="author">
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="category">Category:</label><br>
+                                    <select class="category">
+                                  <option value="1" selected>Book</option>
+                                  <option value="2">Magazine</option>
+                                  <option value="3">Thesis</option>
+                                </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6">
+                                <div class="form-group">
+                                    <label for="availability">Availability:</label><br>
+                                    <select class="availability">
+                                  <option value="1" selected>Avilable</option>
+                                  <option value="2">Unavailable</option>
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="overview">Book Overview:</label>
+                            <textarea name="overview" rows="5" style="width:100%"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal" id="addButton">Add</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <!-- jQuery -->
     <script src="js/jquery-1.12.4.min.js"></script>
     <!-- Bootstrap -->
@@ -238,7 +297,6 @@
 
     <!-- Dashboard Script -->
     <script type="text/javascript" src="js/dashboard.js">
-
     </script>
 </body>
 

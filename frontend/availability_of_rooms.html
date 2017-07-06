@@ -18,6 +18,8 @@
     <link href="vendors/iCheck/skins/flat/green.css" rel="stylesheet">
     <!-- Swal -->
     <link rel="stylesheet" href="css/sweetalert.css">
+    <!-- Data Tables -->
+    <link rel="stylesheet" href="css/jquery.dataTables.min.css">
 
     <!-- Custom Theme Style -->
     <link href="css/gentelella.min.css" rel="stylesheet">
@@ -121,45 +123,66 @@
 
             <!-- page content -->
             <div class="right_col" role="main">
-                <h1>Welcome Back, Gandalf</h1>
-                <br><br><br><br>
+              <div class="main-container container">
+                <table id="availabilityTable" class="display" cellspacing="0" width="100%">
+                  <thead>
+                      <tr>
+                          <th>Room Name</th>
+                          <th>Status</th>
+                          <th></th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th>Leonardo</th>
+                      <th><span class="label label-success">In Service</span></th>
+                      <th>
+                        <select name="leonardoAvailability" id="">
+                          <option value="1">In Service</option>
+                          <option value="0">Out of Service</option>
+                        </select>
+                      </th>
+                    </tr>
+                    <tr>
+                      <th>Donatello</th>
+                      <th><span class="label label-success">In Service</span></th>
+                      <th>
+                        <select name="donatelloAvailability" id="">
+                          <option value="1">In Service</option>
+                          <option value="0">Out of Service</option>
+                        </select>
+                      </th>
+                    </tr>
+                    <tr>
+                      <th>Michaelangelo</th>
+                      <th><span class="label label-success">In Service</span></th>
+                      <th>
+                        <select name="michaelangeloAvailability" id="">
+                          <option value="1">In Service</option>
+                          <option value="0">Out of Service</option>
+                        </select>
+                      </th>
+                    </tr>
+                    <tr>
+                      <th>Raphael</th>
+                      <th><span class="label label-danger">Out of Service</span></th>
+                      <th>
+                        <select name="raphelAvailability" id="">
+                          <option value="1">In Service</option>
+                          <option value="0">Out of Service</option>
+                        </select>
+                      </th>
+                    </tr>
+                  </tbody>
+
+                </table>
+                <br><br>
                 <div class="row">
-                    <a href="" data-toggle="modal" data-target="#addBook">
-                        <div class="col-xs-12 col-md-2 col-md-offset-2 ">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="fa fa-book" style="font-size: 10em;"></div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <h2>&nbsp;&nbsp;Add Book</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="edit_books.html">
-                        <div class="col-xs-12 col-md-2 col-md-offset-1 ">
-                            <div class="row">
-                                <div class="col-xs-12">
-                                    <div class="fa fa-book" style="font-size: 10em;"></div>
-                                </div>
-                                <div class="col-xs-12">
-                                    <h2>Edit/Delete Book</h2>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="availability_of_rooms.html">
-                            <div class="col-xs-12 col-md-2 col-md-offset-1 ">
-                                <div class="row">
-                                    <div class="col-xs-12">
-                                        <div class="fa fa-lightbulb-o" style="font-size: 10em;"></div>
-                                    </div>
-                                    <div class="col-xs-12">
-                                        <h2>Edit Room<br>Availability</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
+                  <div class="col-md-2 col-md-offset-8">
+                    <button class="btn btn-block btn-success" id="availabilitySave">Save</button>
+                  </div>
                 </div>
+              </div>
             </div>
             <!-- /page content -->
 
@@ -173,6 +196,7 @@
             <!-- /footer content -->
         </div>
     </div>
+
     <!-- Modal -->
     <div id="addBook" class="modal fade" role="dialog">
         <div class="modal-dialog">
@@ -231,6 +255,7 @@
         </div>
     </div>
 
+
     <!-- jQuery -->
     <script src="js/jquery-1.12.4.min.js"></script>
     <!-- Bootstrap -->
@@ -240,10 +265,9 @@
     <!-- iCheck -->
     <script src="vendors/iCheck/icheck.min.js"></script>
     <!-- Swal -->
-    <script type="text/javascript" src="js/sweetalert.min.js">
-
-    </script>
-
+    <script type="text/javascript" src="js/sweetalert.min.js"></script>
+    <!-- Data Table -->
+    <script type="text/javascript" src="js/jquery.dataTables.min.js"></script>
     <!-- Custom Theme Scripts -->
     <script src="js/gentelella.min.js"></script>
 
